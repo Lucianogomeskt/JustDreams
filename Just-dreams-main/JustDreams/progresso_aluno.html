@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Progresso - Just Dreams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border-left: 5px solid #4facfe;
+        }
+
+        .stat-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4facfe;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .medalhas {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid #ffeaa7;
+        }
+
+        .medalhas h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .medalha-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .medalha {
+            font-size: 3rem;
+            text-align: center;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+
+        .medalha.conquistada {
+            opacity: 1;
+        }
+
+        .medalha span {
+            display: block;
+            font-size: 0.8rem;
+            color: #856404;
+            margin-top: 5px;
+        }
+
+        .historico {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .historico h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .jogo-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .jogo-info {
+            flex: 1;
+        }
+
+        .jogo-data {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .jogo-stats {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .jogo-medalha {
+            font-size: 2rem;
+            margin-left: 15px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-voltar {
+            background: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: #5a6268;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .jogo-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .jogo-medalha {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Meu Progresso</h1>
+            <p>Acompanhe seu desempenho no jogo de matemática</p>
+        </div>
+        
+        <div class="content">
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button class="btn-voltar" onclick="window.location.href='aluno_dashboard.html'">← Voltar ao Dashboard</button>
+                <button class="btn-voltar" onclick="window.location.href='arvore_habilidades.html'" style="background: #28a745;">🌳 Ver Árvore de Habilidades</button>
+            </div>
+            
+            <div id="loading" class="loading">
+                Carregando seu progresso...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number" id="total-sessoes">0</div>
+                        <div class="label">Sessões Jogadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="total-acertos">0</div>
+                        <div class="label">Acertos Totais</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="taxa-acerto">0%</div>
+                        <div class="label">Taxa de Acerto</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="pontuacao-media">0</div>
+                        <div class="label">Pontuação Média</div>
+                    </div>
+                </div>
+                
+                <div class="medalhas">
+                    <h3>🏆 Medalhas Conquistadas</h3>
+                    <div class="medalha-list">
+                        <div class="medalha" id="medalha-bronze">
+                            🥉<span>Bronze</span>
+                        </div>
+                        <div class="medalha" id="medalha-prata">
+                            🥈<span>Prata</span>
+                        </div>
+                        <div class="medalha" id="medalha-ouro">
+                            🥇<span>Ouro</span>
+                        </div>
+                        <div class="medalha" id="medalha-diamante">
+                            💎<span>Diamante</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="historico">
+                    <h3>📈 Histórico de Jogos</h3>
+                    <div id="historico-lista">
+                        <!-- Histórico será carregado aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Verificar se o usuário está logado
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (!token || user.tipo !== 'aluno') {
+                alert('Você precisa estar logado como aluno!');
+                window.location.href = 'aluno_login.html';
+                return;
+            }
+
+            try {
+                await carregarProgresso();
+            } catch (error) {
+                console.error('Erro ao carregar progresso:', error);
+                mostrarErro('Erro ao carregar seu progresso. Tente novamente.');
+            }
+        });
+
+        async function carregarProgresso() {
+            const token = localStorage.getItem('token');
+            
+            const response = await fetch('http://localhost:3000/api/progresso-jogo/historico', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                exibirProgresso(data.data);
+            } else {
+                throw new Error(data.message);
+            }
+        }
+
+        function exibirProgresso(dados) {
+            // Ocultar loading
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+
+            // Exibir estatísticas gerais
+            const stats = dados.estatisticas;
+            document.getElementById('total-sessoes').textContent = stats.total_sessoes || 0;
+            document.getElementById('total-acertos').textContent = stats.total_acertos || 0;
+            
+            const totalPerguntas = (stats.total_acertos || 0) + (stats.total_erros || 0);
+            const taxaAcerto = totalPerguntas > 0 ? ((stats.total_acertos / totalPerguntas) * 100).toFixed(1) : 0;
+            document.getElementById('taxa-acerto').textContent = taxaAcerto + '%';
+            document.getElementById('pontuacao-media').textContent = Math.round(stats.pontuacao_media || 0);
+
+            // Exibir medalhas conquistadas
+            const medalhas = ['bronze', 'prata', 'ouro', 'diamante'];
+            medalhas.forEach(medalha => {
+                const elemento = document.getElementById(`medalha-${medalha}`);
+                // Verificar se a medalha foi conquistada (lógica simplificada)
+                if (taxaAcerto >= 50) elemento.classList.add('conquistada');
+                if (taxaAcerto >= 70) elemento.classList.add('conquistada');
+                if (taxaAcerto >= 80) elemento.classList.add('conquistada');
+                if (taxaAcerto >= 90) elemento.classList.add('conquistada');
+            });
+
+            // Exibir histórico
+            const historicoLista = document.getElementById('historico-lista');
+            if (dados.historico && dados.historico.length > 0) {
+                dados.historico.forEach(jogo => {
+                    const jogoItem = document.createElement('div');
+                    jogoItem.className = 'jogo-item';
+                    
+                    const dataJogo = new Date(jogo.data_inicio).toLocaleDateString('pt-BR');
+                    const horaJogo = new Date(jogo.data_inicio).toLocaleTimeString('pt-BR', { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    });
+                    
+                    const medalhas = {
+                        'bronze': '🥉',
+                        'prata': '🥈',
+                        'ouro': '🥇',
+                        'diamante': '💎'
+                    };
+                    
+                    jogoItem.innerHTML = `
+                        <div class="jogo-info">
+                            <div class="jogo-data">${dataJogo} às ${horaJogo}</div>
+                            <div class="jogo-stats">${jogo.acertos} acertos, ${jogo.erros} erros - ${jogo.pontuacao} pontos</div>
+                        </div>
+                        <div class="jogo-medalha">${jogo.medalha ? medalhas[jogo.medalha] : ''}</div>
+                    `;
+                    
+                    historicoLista.appendChild(jogoItem);
+                });
+            } else {
+                historicoLista.innerHTML = '<p style="text-align: center; color: #666;">Nenhum jogo encontrado. Comece a jogar para ver seu progresso!</p>';
+            }
+        }
+
+        function mostrarErro(mensagem) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('error').textContent = mensagem;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seu Personagem - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../images/JTFavicon.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .profissao-info {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .profissao-info h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .profissao-info p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .personagens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .personagem-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .personagem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: #4facfe;
+        }
+
+        .personagem-card.selected {
+            border-color: #4facfe;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .personagem-card.selected .personagem-avatar {
+            transform: scale(1.1);
+        }
+
+        .personagem-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            transition: transform 0.3s;
+            border: 3px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .personagem-card.selected .personagem-avatar {
+            border-color: white;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+        }
+
+        .personagem-nome {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .personagem-card.selected .personagem-nome {
+            color: white;
+        }
+
+        .personagem-descricao {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .personagem-card.selected .personagem-descricao {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .btn-continuar {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .btn-continuar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-continuar:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .user-info {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .user-info h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .user-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .personagens-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👤 Escolha seu Personagem</h1>
+            <p>Selecione o personagem que irá representar você na aventura</p>
+        </div>
+        
+        <div class="content">
+            <div id="loading" class="loading">
+                Carregando...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="user-info">
+                    <h3 id="user-name">Carregando...</h3>
+                    <p>Escolha seu personagem para começar a aventura!</p>
+                </div>
+
+                <div class="profissao-info">
+                    <h3 id="profissao-nome">Carregando...</h3>
+                    <p id="profissao-descricao">Carregando...</p>
+                </div>
+
+                <div class="personagens-grid">
+                    <div class="personagem-card" data-personagem="joao">
+                        <div class="personagem-avatar">👦</div>
+                        <div class="personagem-nome">João</div>
+                        <div class="personagem-descricao">
+                            Um jovem curioso e inteligente, sempre pronto para aprender coisas novas.
+                        </div>
+                    </div>
+
+                    <div class="personagem-card" data-personagem="maria">
+                        <div class="personagem-avatar">👧</div>
+                        <div class="personagem-nome">Maria</div>
+                        <div class="personagem-descricao">
+                            Uma garota criativa e determinada, que adora resolver desafios.
+                        </div>
+                    </div>
+
+                    <div class="personagem-card" data-personagem="pedro">
+                        <div class="personagem-avatar">🧑</div>
+                        <div class="personagem-nome">Pedro</div>
+                        <div class="personagem-descricao">
+                            Um adolescente aventureiro, sempre em busca de novas experiências.
+                        </div>
+                    </div>
+
+                    <div class="personagem-card" data-personagem="ana">
+                        <div class="personagem-avatar">👩</div>
+                        <div class="personagem-nome">Ana</div>
+                        <div class="personagem-descricao">
+                            Uma jovem estudiosa e focada, que gosta de superar desafios.
+                        </div>
+                    </div>
+
+                    <div class="personagem-card" data-personagem="lucas">
+                        <div class="personagem-avatar">👨</div>
+                        <div class="personagem-nome">Lucas</div>
+                        <div class="personagem-descricao">
+                            Um rapaz inteligente e persistente, que não desiste fácil.
+                        </div>
+                    </div>
+
+                    <div class="personagem-card" data-personagem="sofia">
+                        <div class="personagem-avatar">👩‍🎓</div>
+                        <div class="personagem-nome">Sofia</div>
+                        <div class="personagem-descricao">
+                            Uma estudante dedicada e organizada, que ama aprender.
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-continuar" id="btn-continuar" disabled onclick="continuar()">
+                    🎮 Iniciar Jogo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let personagemSelecionado = null;
+        let profissaoEscolhida = null;
+        let user = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar se o usuário está logado
+            const token = localStorage.getItem('token');
+            user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (!token || user.tipo !== 'aluno') {
+                alert('Você precisa estar logado como aluno!');
+                window.location.href = 'aluno_login.html';
+                return;
+            }
+
+            // Verificar se a profissão foi escolhida (específico para o usuário)
+            const profissaoKey = `profissaoEscolhida_${user.id}`;
+            profissaoEscolhida = localStorage.getItem(profissaoKey);
+            if (!profissaoEscolhida) {
+                alert('Por favor, escolha uma profissão primeiro!');
+                window.location.href = 'escolha_profissao.html';
+                return;
+            }
+
+            // Exibir informações do usuário
+            document.getElementById('user-name').textContent = `Olá, ${user.nome}!`;
+
+            // Exibir informações da profissão escolhida
+            exibirProfissaoEscolhida();
+
+            // Configurar seleção de personagens
+            configurarSelecaoPersonagens();
+
+            // Ocultar loading e mostrar conteúdo
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        });
+
+        function exibirProfissaoEscolhida() {
+            const profissoes = {
+                'medico': { nome: '👨‍⚕️ Médico', descricao: 'Você escolheu ser um médico! Cure pacientes resolvendo problemas matemáticos.' },
+                'engenheiro': { nome: '👷‍♂️ Engenheiro', descricao: 'Você escolheu ser um engenheiro! Construa estruturas incríveis com cálculos matemáticos.' },
+                'astronauta': { nome: '🚀 Astronauta', descricao: 'Você escolheu ser um astronauta! Explore o espaço calculando trajetórias e distâncias.' },
+                'chef': { nome: '👨‍🍳 Chef', descricao: 'Você escolheu ser um chef! Crie pratos deliciosos calculando ingredientes e proporções.' },
+                'artista': { nome: '🎨 Artista', descricao: 'Você escolheu ser um artista! Crie obras de arte usando geometria e proporções matemáticas.' },
+                'cientista': { nome: '🔬 Cientista', descricao: 'Você escolheu ser um cientista! Faça descobertas incríveis através de cálculos e experimentos.' }
+            };
+
+            const profissao = profissoes[profissaoEscolhida] || { nome: 'Profissão', descricao: 'Você escolheu uma profissão!' };
+            
+            document.getElementById('profissao-nome').textContent = profissao.nome;
+            document.getElementById('profissao-descricao').textContent = profissao.descricao;
+        }
+
+        function configurarSelecaoPersonagens() {
+            const cards = document.querySelectorAll('.personagem-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    console.log('Personagem clicado:', card.dataset.personagem);
+                    
+                    // Remover seleção anterior
+                    cards.forEach(c => c.classList.remove('selected'));
+                    
+                    // Selecionar novo personagem
+                    card.classList.add('selected');
+                    personagemSelecionado = card.dataset.personagem;
+                    
+                    console.log('Personagem selecionado:', personagemSelecionado);
+                    
+                    // Habilitar botão continuar
+                    const btnContinuar = document.getElementById('btn-continuar');
+                    btnContinuar.disabled = false;
+                    console.log('Botão continuar habilitado');
+                });
+            });
+            
+            // Adicionar listener adicional para o botão continuar
+            const btnContinuar = document.getElementById('btn-continuar');
+            btnContinuar.addEventListener('click', (e) => {
+                console.log('Botão continuar clicado via addEventListener');
+                e.preventDefault();
+                continuar();
+            });
+        }
+
+        function continuar() {
+            console.log('Função continuar() chamada');
+            console.log('Personagem selecionado:', personagemSelecionado);
+            console.log('Usuário:', user);
+            
+            if (!personagemSelecionado) {
+                alert('Por favor, selecione um personagem!');
+                return;
+            }
+
+            // Verificar se o usuário está definido
+            if (!user || !user.id) {
+                alert('Erro: Usuário não encontrado. Faça login novamente.');
+                window.location.href = 'aluno_login.html';
+                return;
+            }
+
+            // Salvar personagem escolhido no localStorage (específico para o usuário)
+            const personagemKey = `personagemEscolhido_${user.id}`;
+            localStorage.setItem(personagemKey, personagemSelecionado);
+            
+            console.log('Personagem salvo:', personagemSelecionado, 'para usuário:', user.id);
+            console.log('Chave do personagem:', personagemKey);
+            console.log('Valor salvo no localStorage:', localStorage.getItem(personagemKey));
+            
+            // Verificar se a profissão também está salva
+            const profissaoKey = `profissaoEscolhida_${user.id}`;
+            const profissaoSalva = localStorage.getItem(profissaoKey);
+            console.log('Profissão salva:', profissaoSalva);
+            
+            if (!profissaoSalva) {
+                alert('Erro: Profissão não encontrada. Volte e escolha uma profissão primeiro.');
+                window.location.href = 'escolha_profissao.html';
+                return;
+            }
+            
+            console.log('Redirecionando para o jogo...');
+            alert('Redirecionando para o jogo!');
+            
+            // Redirecionar para o jogo
+            window.location.href = 'http://localhost:3000/Just-dreams-main/Jogo/game.html';
+        }
+    </script>
+</body>
+</html>

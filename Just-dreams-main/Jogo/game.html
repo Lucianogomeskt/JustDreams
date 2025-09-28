@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Dreams - Curando com Matemática</title>
+    <link rel="icon" type="image/png" href="../images/JTFavicon.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-game.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1 id="game-title">Curando com Matemática!</h1>
+            <p id="game-subtitle">Ajude seus pacientes resolvendo problemas matemáticos.</p>
+            <div class="character-info">
+                <div class="character-avatar" id="character-avatar">👦</div>
+                <div class="character-details">
+                    <div class="character-name" id="character-name">João</div>
+                    <div class="character-profession" id="character-profession">Médico</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="patient-card">
+            <div class="patient-name">Paciente "joao"</div>
+            <div class="health-bar-container">
+                <div class="health-bar-label">Saúde:</div>
+                <div id="health-bar" class="health-bar"></div>
+            </div>
+            <img id="patient-image" src="Avatar/Captura de tela 2025-09-03 162406.png" alt="Paciente" class="patient-image">
+        </div>
+
+        <div class="question-area">
+            <p id="math-question" class="math-question">Clique em "Iniciar Jogo" para começar!</p>
+            <div class="input-area">
+                <input type="number" id="answer-input" placeholder="Sua resposta" disabled>
+                <button id="submit-button" class="game-button" disabled>Enviar Resposta</button>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <button id="start-button" class="game-button primary">Iniciar Jogo</button>
+            <button id="reset-button" class="game-button secondary" disabled>Reiniciar Jogo</button>
+            <button id="advance-button" class="game-button success" style="display: none;">Avançar para Próxima Fase</button>
+        </div>
+
+        <div id="game-feedback" class="game-feedback"></div>
+    </div>
+    
+    <script src="script-game.js"></script>
+</body>
+</html>

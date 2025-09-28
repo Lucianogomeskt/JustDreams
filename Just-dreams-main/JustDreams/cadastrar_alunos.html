@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Alunos - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../images/JTFavicon.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .btn-voltar {
+            background: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: #5a6268;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+
+        .form-group .help-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-submit:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            margin: 40px 0 20px 0;
+            border-radius: 1px;
+        }
+
+        .section-header {
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .alunos-container {
+            margin-bottom: 30px;
+        }
+
+        .aluno-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .aluno-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .aluno-info {
+            flex: 1;
+        }
+
+        .aluno-nome {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .aluno-detalhes {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .aluno-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-adicionar {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .btn-adicionar:hover {
+            background: #45a049;
+        }
+
+        .btn-remover {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .btn-remover:hover {
+            background: #da190b;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👥 Cadastrar Alunos</h1>
+            <p>Adicione novos alunos ao sistema</p>
+        </div>
+        
+        <div class="content">
+            <button class="btn-voltar" onclick="window.location.href='professor_dashboard.html'">← Voltar ao Dashboard</button>
+            
+            <div class="info-box">
+                <strong>ℹ️ Informação:</strong> Os alunos cadastrados aqui poderão fazer login no sistema e acessar o jogo de matemática. Certifique-se de que os dados estão corretos.
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            <div id="success" class="success" style="display: none;"></div>
+            
+            <form id="cadastrar-aluno-form">
+                <div class="form-group">
+                    <label for="nome">Nome Completo do Aluno *</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Ex: João Silva Santos">
+                    <div class="help-text">Digite o nome completo do aluno</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="idade">Idade *</label>
+                        <input type="number" id="idade" name="idade" required min="5" max="100" placeholder="Ex: 8">
+                        <div class="help-text">Idade entre 5 e 100 anos</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turma">Turma *</label>
+                        <input type="text" id="turma" name="turma" required placeholder="Ex: 1°A, 2°B, 3°C" pattern="[0-9]+°[A-Za-z]" title="Formato: número + ° + letra (ex: 1°A)">
+                        <div class="help-text">Digite a turma no formato: número + ° + letra (ex: 1°A, 2°B, 3°C)</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha *</label>
+                    <input type="password" id="senha" name="senha" required placeholder="Mínimo 6 caracteres">
+                    <div class="help-text">A senha deve ter pelo menos 6 caracteres</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmar_senha">Confirmar Senha *</label>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" required placeholder="Digite a senha novamente">
+                    <div class="help-text">Digite a mesma senha para confirmar</div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn-submit">
+                    Cadastrar Aluno
+                </button>
+            </form>
+
+            <!-- Seção de Alunos da Turma -->
+            <div class="section-divider"></div>
+            <div class="section-header">
+                <h2>👥 Alunos da Sua Turma</h2>
+                <p>Alunos cadastrados em suas turmas</p>
+            </div>
+            
+            <div id="alunos-turma" class="alunos-container">
+                <div class="loading">Carregando alunos...</div>
+            </div>
+
+            <!-- Seção de Alunos Sem Turma -->
+            <div class="section-divider"></div>
+            <div class="section-header">
+                <h2>🔍 Alunos Sem Turma</h2>
+                <p>Alunos cadastrados no sistema que não estão em nenhuma turma</p>
+            </div>
+            
+            <div id="alunos-sem-turma" class="alunos-container">
+                <div class="loading">Carregando alunos sem turma...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Verificar se o usuário está logado
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (!token || user.tipo !== 'professor') {
+                alert('Você precisa estar logado como professor!');
+                window.location.href = 'professor_login.html';
+                return;
+            }
+
+            // Carregar dados dos alunos
+            await carregarAlunosTurma();
+            await carregarAlunosSemTurma();
+
+            const form = document.getElementById('cadastrar-aluno-form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await cadastrarAluno();
+            });
+        });
+
+
+        async function cadastrarAluno() {
+            const form = document.getElementById('cadastrar-aluno-form');
+            const formData = new FormData(form);
+            
+            const alunoData = {
+                nome: formData.get('nome'),
+                idade: parseInt(formData.get('idade')),
+                turma: formData.get('turma'),
+                senha: formData.get('senha'),
+                confirmar_senha: formData.get('confirmar_senha'),
+                tipo: 'aluno'
+            };
+
+            // Validar dados
+            if (!alunoData.nome || alunoData.nome.trim() === '') {
+                mostrarErro('O nome do aluno é obrigatório.');
+                return;
+            }
+
+            if (!alunoData.idade || alunoData.idade < 5 || alunoData.idade > 100) {
+                mostrarErro('A idade deve estar entre 5 e 100 anos.');
+                return;
+            }
+
+            if (!alunoData.turma || alunoData.turma.trim() === '') {
+                mostrarErro('A turma do aluno é obrigatória.');
+                return;
+            }
+
+            // Validar formato da turma (número + ° + letra)
+            const turmaRegex = /^[0-9]+°[A-Za-z]$/;
+            if (!turmaRegex.test(alunoData.turma.trim())) {
+                mostrarErro('A turma deve estar no formato: número + ° + letra (ex: 1°A, 2°B, 3°C).');
+                return;
+            }
+
+            if (!alunoData.senha || alunoData.senha.length < 6) {
+                mostrarErro('A senha deve ter pelo menos 6 caracteres.');
+                return;
+            }
+
+            if (alunoData.senha !== alunoData.confirmar_senha) {
+                mostrarErro('As senhas não coincidem.');
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+            const btnSubmit = document.getElementById('btn-submit');
+            
+            try {
+                btnSubmit.disabled = true;
+                btnSubmit.textContent = 'Cadastrando...';
+
+                // Cadastrar o aluno com turma no formato especificado
+                const registerData = {
+                    nome: alunoData.nome,
+                    idade: alunoData.idade,
+                    turma: alunoData.turma.trim(), // Turma no formato 1°A, 2°B, etc.
+                    senha: alunoData.senha,
+                    tipo: 'aluno'
+                };
+
+                const response = await fetch('http://localhost:3000/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(registerData)
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    mostrarSucesso('Aluno cadastrado com sucesso!');
+                    form.reset();
+                    // Recarregar listas de alunos
+                    await carregarAlunosTurma();
+                    await carregarAlunosSemTurma();
+                } else {
+                    mostrarErro('Erro ao cadastrar aluno: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                mostrarErro('Erro de conexão. Verifique se o servidor está rodando.');
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = 'Cadastrar Aluno';
+            }
+        }
+
+        function mostrarErro(mensagem) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = mensagem;
+            errorDiv.style.display = 'block';
+            
+            const successDiv = document.getElementById('success');
+            successDiv.style.display = 'none';
+        }
+
+        function mostrarSucesso(mensagem) {
+            const successDiv = document.getElementById('success');
+            successDiv.textContent = mensagem;
+            successDiv.style.display = 'block';
+            
+            const errorDiv = document.getElementById('error');
+            errorDiv.style.display = 'none';
+        }
+
+        async function carregarAlunosTurma() {
+            const token = localStorage.getItem('token');
+            const container = document.getElementById('alunos-turma');
+            
+            try {
+                // Primeiro, buscar as turmas do professor
+                const turmasResponse = await fetch('http://localhost:3000/api/turmas', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!turmasResponse.ok) {
+                    container.innerHTML = '<div class="no-data">Erro ao carregar turmas</div>';
+                    return;
+                }
+
+                const turmasData = await turmasResponse.json();
+                if (!turmasData.success || turmasData.data.length === 0) {
+                    container.innerHTML = '<div class="no-data">Nenhuma turma cadastrada</div>';
+                    return;
+                }
+
+                // Buscar alunos de cada turma
+                let todosAlunos = [];
+                for (const turma of turmasData.data) {
+                    const progressoResponse = await fetch(`http://localhost:3000/api/progresso/turma/${turma.id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+
+                    if (progressoResponse.ok) {
+                        const progressoData = await progressoResponse.json();
+                        if (progressoData.success && progressoData.data.alunos) {
+                            todosAlunos = todosAlunos.concat(progressoData.data.alunos);
+                        }
+                    }
+                }
+
+                exibirAlunosTurma(todosAlunos, container);
+
+            } catch (error) {
+                console.error('Erro ao carregar alunos da turma:', error);
+                container.innerHTML = '<div class="no-data">Erro de conexão</div>';
+            }
+        }
+
+        async function carregarAlunosSemTurma() {
+            const token = localStorage.getItem('token');
+            const container = document.getElementById('alunos-sem-turma');
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/turmas/alunos/sem-turma', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        exibirAlunosSemTurma(data.data, container);
+                    } else {
+                        container.innerHTML = '<div class="no-data">Erro ao carregar alunos sem turma</div>';
+                    }
+                } else {
+                    container.innerHTML = '<div class="no-data">Erro ao carregar alunos sem turma</div>';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar alunos sem turma:', error);
+                container.innerHTML = '<div class="no-data">Erro de conexão</div>';
+            }
+        }
+
+        function exibirAlunosTurma(alunos, container) {
+            if (!alunos || alunos.length === 0) {
+                container.innerHTML = '<div class="no-data">Nenhum aluno cadastrado em suas turmas</div>';
+                return;
+            }
+
+            const html = alunos.map(aluno => `
+                <div class="aluno-card">
+                    <div class="aluno-info">
+                        <div class="aluno-nome">${aluno.nome}</div>
+                        <div class="aluno-detalhes">Turma: ${aluno.turma} | Idade: ${aluno.idade} anos</div>
+                    </div>
+                    <div class="aluno-actions">
+                        <button class="btn-remover" onclick="removerAlunoTurma(${aluno.id})">Remover da Turma</button>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = html;
+        }
+
+        function exibirAlunosSemTurma(alunos, container) {
+            if (!alunos || alunos.length === 0) {
+                container.innerHTML = '<div class="no-data">Nenhum aluno sem turma encontrado</div>';
+                return;
+            }
+
+            const html = alunos.map(aluno => `
+                <div class="aluno-card">
+                    <div class="aluno-info">
+                        <div class="aluno-nome">${aluno.nome}</div>
+                        <div class="aluno-detalhes">Idade: ${aluno.idade} anos</div>
+                    </div>
+                    <div class="aluno-actions">
+                        <button class="btn-adicionar" onclick="adicionarAlunoTurma(${aluno.id})" data-aluno-id="${aluno.id}">Adicionar à Turma</button>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = html;
+            
+            // Adicionar event listeners aos botões
+            container.querySelectorAll('.btn-adicionar').forEach(button => {
+                button.addEventListener('click', function() {
+                    const alunoId = this.getAttribute('data-aluno-id');
+                    console.log('Botão clicado, ID do aluno:', alunoId);
+                    adicionarAlunoTurma(parseInt(alunoId));
+                });
+            });
+        }
+
+        async function adicionarAlunoTurma(alunoId) {
+            console.log('Função adicionarAlunoTurma chamada com ID:', alunoId);
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                mostrarErro('Token de autenticação não encontrado. Faça login novamente.');
+                return;
+            }
+            
+            // Primeiro, carregar as turmas do professor
+            try {
+                const turmasResponse = await fetch('http://localhost:3000/api/turmas', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!turmasResponse.ok) {
+                    mostrarErro('Erro ao carregar turmas');
+                    return;
+                }
+
+                const turmasData = await turmasResponse.json();
+                console.log('Dados das turmas:', turmasData);
+                
+                if (!turmasData.success || turmasData.data.length === 0) {
+                    mostrarErro('Você não possui turmas cadastradas');
+                    return;
+                }
+
+                // Mostrar seletor de turma
+                const turmas = turmasData.data;
+                
+                // Criar uma lista mais amigável
+                const turmasLista = turmas.map((turma, index) => 
+                    `${index + 1}. ${turma.nome} (ID: ${turma.id})`
+                ).join('\n');
+
+                const turmaId = prompt(`Selecione a turma para adicionar o aluno:\n\n${turmasLista}\n\nDigite o ID da turma:`);
+                
+                if (!turmaId || turmaId.trim() === '') {
+                    return;
+                }
+
+                // Validar se o ID da turma existe
+                const turmaSelecionada = turmas.find(t => t.id == turmaId);
+                if (!turmaSelecionada) {
+                    mostrarErro('ID da turma inválido. Tente novamente.');
+                    return;
+                }
+
+                // Adicionar aluno à turma
+                console.log('Enviando requisição para adicionar aluno:', { alunoId, turmaId });
+                
+                const response = await fetch(`http://localhost:3000/api/turmas/${turmaId}/alunos`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ alunoId: alunoId })
+                });
+
+                console.log('Resposta da API:', response.status, response.statusText);
+                const data = await response.json();
+                console.log('Dados da resposta:', data);
+                
+                if (data.success) {
+                    mostrarSucesso('Aluno adicionado à turma com sucesso!');
+                    await carregarAlunosTurma();
+                    await carregarAlunosSemTurma();
+                } else {
+                    mostrarErro('Erro ao adicionar aluno à turma: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                mostrarErro('Erro de conexão');
+            }
+        }
+
+        async function removerAlunoTurma(alunoId) {
+            if (!confirm('Tem certeza que deseja remover este aluno da turma?')) {
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+            
+            try {
+                const response = await fetch(`http://localhost:3000/api/turmas/aluno/${alunoId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    mostrarSucesso('Aluno removido da turma com sucesso!');
+                    await carregarAlunosTurma();
+                    await carregarAlunosSemTurma();
+                } else {
+                    mostrarErro('Erro ao remover aluno da turma: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                mostrarErro('Erro de conexão');
+            }
+        }
+    </script>
+</body>
+</html>

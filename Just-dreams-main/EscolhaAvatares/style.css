@@ -1,0 +1,139 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #21193d; /* Roxo escuro */
+    color: #fff;
+}
+
+.selection-container {
+    text-align: center;
+    padding: 40px;
+    background: #2b234d;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 800px;
+}
+
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.profession-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.profession-card {
+    background-color: #3b3363;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+    border: 2px solid transparent;
+}
+
+.profession-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.profession-card.selected {
+    border-color: #ff55c2; /* Rosa vibrante */
+    box-shadow: 0 0 20px rgba(255, 85, 194, 0.5);
+}
+
+.profession-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.avatar-section {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.avatar-section.hidden {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+h2 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.avatar-card {
+    background-color: #3b3363;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+    border: 2px solid transparent;
+}
+
+.avatar-card.selected {
+    border-color: #5555ff; /* Azul vibrante */
+    box-shadow: 0 0 15px rgba(85, 85, 255, 0.5);
+}
+
+.avatar-img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.next-button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: #5555ff;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.next-button:hover:not(:disabled) {
+    background-color: #ff55c2;
+}
+
+.next-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .profession-grid, .avatar-grid {
+        grid-template-columns: 1fr;
+    }
+}

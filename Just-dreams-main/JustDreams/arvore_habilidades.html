@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árvore de Habilidades - Just Dreams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .content {
+            padding: 30px;
+            min-height: 600px;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4facfe;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .tree-container {
+            position: relative;
+            min-height: 500px;
+            background: linear-gradient(180deg, #87CEEB 0%, #98FB98 100%);
+            border-radius: 15px;
+            padding: 40px;
+            overflow: hidden;
+        }
+
+        .tree-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="20" r="3" fill="%23FFD700"/><circle cx="30" cy="30" r="2" fill="%23FFD700"/><circle cx="70" cy="30" r="2" fill="%23FFD700"/><circle cx="20" cy="50" r="2" fill="%23FFD700"/><circle cx="80" cy="50" r="2" fill="%23FFD700"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .skill-tree {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .skill-row {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .skill-node {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 4px solid transparent;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .skill-node.unlocked {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(79, 172, 254, 0.4);
+        }
+
+        .skill-node.mastered {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #333;
+            transform: scale(1.2);
+            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+
+        .skill-node.locked {
+            background: linear-gradient(45deg, #ccc, #999);
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 8px 16px rgba(255, 215, 0, 0.5); }
+            to { box-shadow: 0 8px 20px rgba(255, 215, 0, 0.8); }
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .skill-name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .skill-level {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .connection-line {
+            position: absolute;
+            background: #4facfe;
+            height: 3px;
+            z-index: 1;
+        }
+
+        .connection-line.horizontal {
+            width: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .connection-line.vertical {
+            width: 3px;
+            height: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .connection-line.unlocked {
+            background: #4facfe;
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+        }
+
+        .connection-line.locked {
+            background: #ccc;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-voltar {
+            background: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: #5a6268;
+        }
+
+        .progress-info {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .skill-row {
+                gap: 30px;
+            }
+            
+            .skill-node {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .skill-icon {
+                font-size: 1.5rem;
+            }
+            
+            .skill-name {
+                font-size: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌳 Árvore de Habilidades</h1>
+            <p>Veja como você está crescendo na sua jornada de aprendizado!</p>
+            <div class="user-info" id="user-info">
+                Carregando...
+            </div>
+            <button id="teste-masterizar" onclick="simularMasterizacao()" style="
+                background: #4facfe;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 20px;
+                cursor: pointer;
+                margin-top: 10px;
+                font-size: 14px;
+            ">🧪 Teste: Masterizar Todas as Habilidades</button>
+        </div>
+        
+        <div class="content">
+            <button class="btn-voltar" onclick="window.location.href='progresso_aluno.html'">← Voltar ao Progresso</button>
+            
+            <div id="loading" class="loading">
+                🌱 Cultivando sua árvore de habilidades...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-habilidades">0</div>
+                        <div class="stat-label">Habilidades Desbloqueadas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="nivel-atual">1</div>
+                        <div class="stat-label">Nível Atual</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="pontos-experiencia">0</div>
+                        <div class="stat-label">Pontos de Experiência</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="proximo-nivel">100</div>
+                        <div class="stat-label">Próximo Nível</div>
+                    </div>
+                </div>
+
+                <div class="tree-container">
+                    <div class="tree-bg"></div>
+                    <div class="skill-tree" id="skill-tree">
+                        <!-- Árvore será gerada aqui -->
+                    </div>
+                </div>
+
+                <div class="progress-info">
+                    <div class="progress-title">Progresso para o Próximo Nível</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text">0 / 100 XP</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Definir habilidades da árvore
+        const habilidades = {
+            // Nível 1 - Raiz
+            'raiz': {
+                nome: 'Iniciante',
+                icon: '🌱',
+                nivel: 1,
+                requisitos: [],
+                xp: 0
+            },
+            // Nível 2 - Primeiras folhas
+            'adicao': {
+                nome: 'Adição',
+                icon: '➕',
+                nivel: 2,
+                requisitos: ['raiz'],
+                xp: 50
+            },
+            'subtracao': {
+                nome: 'Subtração',
+                icon: '➖',
+                nivel: 2,
+                requisitos: ['raiz'],
+                xp: 50
+            },
+            // Nível 3 - Ramos
+            'multiplicacao': {
+                nome: 'Multiplicação',
+                icon: '✖️',
+                nivel: 3,
+                requisitos: ['adicao', 'subtracao'],
+                xp: 100
+            },
+            'divisao': {
+                nome: 'Divisão',
+                icon: '➗',
+                nivel: 3,
+                requisitos: ['adicao', 'subtracao'],
+                xp: 100
+            },
+            // Nível 4 - Galhos
+            'fracoes': {
+                nome: 'Frações',
+                icon: '🔢',
+                nivel: 4,
+                requisitos: ['multiplicacao', 'divisao'],
+                xp: 200
+            },
+            'decimais': {
+                nome: 'Decimais',
+                icon: '📊',
+                nivel: 4,
+                requisitos: ['multiplicacao', 'divisao'],
+                xp: 200
+            },
+            // Nível 5 - Folhas
+            'geometria': {
+                nome: 'Geometria',
+                icon: '📐',
+                nivel: 5,
+                requisitos: ['fracoes', 'decimais'],
+                xp: 300
+            },
+            'algebra': {
+                nome: 'Álgebra',
+                icon: '📈',
+                nivel: 5,
+                requisitos: ['fracoes', 'decimais'],
+                xp: 300
+            },
+            // Nível 6 - Copa
+            'mestre': {
+                nome: 'Mestre',
+                icon: '👑',
+                nivel: 6,
+                requisitos: ['geometria', 'algebra'],
+                xp: 500
+            }
+        };
+
+        let progressoData = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Verificar se o usuário está logado
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (!token || user.tipo !== 'aluno') {
+                alert('Você precisa estar logado como aluno!');
+                window.location.href = 'aluno_login.html';
+                return;
+            }
+
+            // Exibir informações do usuário
+            document.getElementById('user-info').textContent = `👤 ${user.nome}`;
+
+            try {
+                await carregarProgresso();
+                await gerarArvore();
+            } catch (error) {
+                console.error('Erro ao carregar árvore:', error);
+                mostrarErro('Erro ao carregar sua árvore de habilidades. Tente novamente.');
+            }
+        });
+
+        async function carregarProgresso() {
+            const token = localStorage.getItem('token');
+            
+            const response = await fetch('http://localhost:3000/api/progresso-jogo/historico', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                progressoData = data.data;
+                calcularHabilidades();
+            } else {
+                throw new Error(data.message);
+            }
+        }
+
+        function calcularHabilidades() {
+            const stats = progressoData.estatisticas;
+            const totalAcertos = stats.total_acertos || 0;
+            const totalErros = stats.total_erros || 0;
+            const totalPerguntas = totalAcertos + totalErros;
+            const taxaAcerto = totalPerguntas > 0 ? (totalAcertos / totalPerguntas) * 100 : 0;
+            const totalSessoes = stats.total_sessoes || 0;
+
+            // Calcular XP baseado no progresso
+            let xpTotal = 0;
+            let habilidadesDesbloqueadas = 0;
+            let nivelAtual = 1;
+
+            // XP por acertos
+            xpTotal += totalAcertos * 10;
+            
+            // XP por sessões completadas
+            xpTotal += totalSessoes * 25;
+            
+            // XP por taxa de acerto
+            if (taxaAcerto >= 50) xpTotal += 100;
+            if (taxaAcerto >= 70) xpTotal += 150;
+            if (taxaAcerto >= 80) xpTotal += 200;
+            if (taxaAcerto >= 90) xpTotal += 300;
+
+            // Determinar nível baseado no XP
+            if (xpTotal >= 500) nivelAtual = 6;
+            else if (xpTotal >= 300) nivelAtual = 5;
+            else if (xpTotal >= 200) nivelAtual = 4;
+            else if (xpTotal >= 100) nivelAtual = 3;
+            else if (xpTotal >= 50) nivelAtual = 2;
+
+            // Determinar habilidades desbloqueadas
+            Object.keys(habilidades).forEach(habilidadeId => {
+                const habilidade = habilidades[habilidadeId];
+                if (xpTotal >= habilidade.xp) {
+                    habilidadesDesbloqueadas++;
+                }
+            });
+
+            // Atualizar interface
+            document.getElementById('total-habilidades').textContent = habilidadesDesbloqueadas;
+            document.getElementById('nivel-atual').textContent = nivelAtual;
+            document.getElementById('pontos-experiencia').textContent = xpTotal;
+
+            // Calcular progresso para próximo nível
+            const niveis = [0, 50, 100, 200, 300, 500];
+            const proximoNivel = niveis[nivelAtual] || 1000;
+            const xpAtualNivel = niveis[nivelAtual - 1] || 0;
+            const xpNecessario = proximoNivel - xpAtualNivel;
+            const xpProgresso = xpTotal - xpAtualNivel;
+            const percentualProgresso = Math.min((xpProgresso / xpNecessario) * 100, 100);
+
+            document.getElementById('proximo-nivel').textContent = proximoNivel;
+            document.getElementById('progress-fill').style.width = percentualProgresso + '%';
+            document.getElementById('progress-text').textContent = `${xpProgresso} / ${xpNecessario} XP`;
+
+            // Armazenar dados para a árvore
+            window.habilidadesData = {
+                xpTotal,
+                nivelAtual,
+                taxaAcerto,
+                totalSessoes,
+                totalAcertos
+            };
+        }
+
+        async function gerarArvore() {
+            const container = document.getElementById('skill-tree');
+            container.innerHTML = '';
+
+            // Organizar habilidades por nível
+            const habilidadesPorNivel = {};
+            Object.keys(habilidades).forEach(id => {
+                const nivel = habilidades[id].nivel;
+                if (!habilidadesPorNivel[nivel]) {
+                    habilidadesPorNivel[nivel] = [];
+                }
+                habilidadesPorNivel[nivel].push({ id, ...habilidades[id] });
+            });
+
+            // Gerar árvore
+            Object.keys(habilidadesPorNivel).sort((a, b) => a - b).forEach(nivel => {
+                const row = document.createElement('div');
+                row.className = 'skill-row';
+                
+                habilidadesPorNivel[nivel].forEach(habilidade => {
+                    const node = criarNoHabilidade(habilidade);
+                    row.appendChild(node);
+                });
+                
+                container.appendChild(row);
+            });
+
+            // Adicionar linhas de conexão
+            adicionarLinhasConexao();
+
+            // Ocultar loading e mostrar conteúdo
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            
+            // Verificar se todas as habilidades já estão masterizadas
+            verificarConclusaoArvore();
+        }
+
+        function criarNoHabilidade(habilidade) {
+            const node = document.createElement('div');
+            node.className = 'skill-node';
+            node.id = `skill-${habilidade.id}`;
+
+            const status = determinarStatusHabilidade(habilidade);
+            node.classList.add(status);
+
+            node.innerHTML = `
+                <div class="skill-icon">${habilidade.icon}</div>
+                <div class="skill-name">${habilidade.nome}</div>
+                ${status === 'unlocked' || status === 'mastered' ? 
+                    `<div class="skill-level">${habilidade.nivel}</div>` : ''}
+            `;
+
+            // Adicionar tooltip
+            node.title = `${habilidade.nome} - Nível ${habilidade.nivel}\nXP necessário: ${habilidade.xp}`;
+
+            // Adicionar evento de clique
+            node.addEventListener('click', () => {
+                mostrarDetalhesHabilidade(habilidade, status);
+            });
+
+            return node;
+        }
+
+        function determinarStatusHabilidade(habilidade) {
+            const data = window.habilidadesData;
+            if (!data) return 'locked';
+
+            if (data.xpTotal >= habilidade.xp) {
+                // Verificar se é masterizado (taxa de acerto alta + muitas sessões)
+                if (data.taxaAcerto >= 80 && data.totalSessoes >= 5) {
+                    return 'mastered';
+                }
+                return 'unlocked';
+            }
+            return 'locked';
+        }
+
+        function adicionarLinhasConexao() {
+            const container = document.getElementById('skill-tree');
+            
+            Object.keys(habilidades).forEach(habilidadeId => {
+                const habilidade = habilidades[habilidadeId];
+                const node = document.getElementById(`skill-${habilidadeId}`);
+                
+                if (!node) return;
+
+                habilidade.requisitos.forEach(requisitoId => {
+                    const requisitoNode = document.getElementById(`skill-${requisitoId}`);
+                    if (requisitoNode) {
+                        criarLinhaConexao(requisitoNode, node);
+                    }
+                });
+            });
+        }
+
+        function criarLinhaConexao(fromNode, toNode) {
+            const container = document.getElementById('skill-tree');
+            const line = document.createElement('div');
+            line.className = 'connection-line';
+
+            const fromRect = fromNode.getBoundingClientRect();
+            const toRect = toNode.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+
+            const fromX = fromRect.left + fromRect.width / 2 - containerRect.left;
+            const fromY = fromRect.top + fromRect.height / 2 - containerRect.top;
+            const toX = toRect.left + toRect.width / 2 - containerRect.left;
+            const toY = toRect.top + toRect.height / 2 - containerRect.top;
+
+            // Determinar se é linha horizontal ou vertical
+            if (Math.abs(fromY - toY) < 50) {
+                // Linha horizontal
+                line.classList.add('horizontal');
+                line.style.left = Math.min(fromX, toX) + 'px';
+                line.style.top = fromY + 'px';
+                line.style.width = Math.abs(toX - fromX) + 'px';
+            } else {
+                // Linha vertical
+                line.classList.add('vertical');
+                line.style.left = fromX + 'px';
+                line.style.top = Math.min(fromY, toY) + 'px';
+                line.style.height = Math.abs(toY - fromY) + 'px';
+            }
+
+            // Determinar status da linha
+            const fromStatus = fromNode.classList.contains('unlocked') || fromNode.classList.contains('mastered');
+            const toStatus = toNode.classList.contains('unlocked') || toNode.classList.contains('mastered');
+            
+            if (fromStatus && toStatus) {
+                line.classList.add('unlocked');
+            } else {
+                line.classList.add('locked');
+            }
+
+            container.appendChild(line);
+        }
+
+        function mostrarDetalhesHabilidade(habilidade, status) {
+            const data = window.habilidadesData;
+            let mensagem = `🌳 ${habilidade.nome}\n\n`;
+            mensagem += `📊 Nível: ${habilidade.nivel}\n`;
+            mensagem += `⭐ XP Necessário: ${habilidade.xp}\n`;
+            mensagem += `🎯 Status: `;
+
+            switch (status) {
+                case 'mastered':
+                    mensagem += 'MASTERIZADO! 🏆\n\n';
+                    mensagem += `✨ Parabéns! Você dominou completamente esta habilidade!\n`;
+                    mensagem += `📈 Taxa de acerto: ${data.taxaAcerto.toFixed(1)}%\n`;
+                    mensagem += `🎮 Sessões jogadas: ${data.totalSessoes}`;
+                    break;
+                case 'unlocked':
+                    mensagem += 'DESBLOQUEADO! 🎉\n\n';
+                    mensagem += `🎯 Continue praticando para masterizar!\n`;
+                    mensagem += `📈 Taxa de acerto: ${data.taxaAcerto.toFixed(1)}%\n`;
+                    mensagem += `🎮 Sessões jogadas: ${data.totalSessoes}`;
+                    break;
+                case 'locked':
+                    mensagem += 'BLOQUEADO 🔒\n\n';
+                    mensagem += `💪 Você precisa de ${habilidade.xp - data.xpTotal} XP a mais!\n`;
+                    mensagem += `🎯 Continue jogando para desbloquear!`;
+                    break;
+            }
+
+            alert(mensagem);
+            
+            // Verificar se todas as habilidades foram masterizadas
+            verificarConclusaoArvore();
+        }
+        
+        function verificarConclusaoArvore() {
+            const data = window.habilidadesData;
+            if (!data) return;
+            
+            // Verificar se todas as habilidades estão masterizadas
+            const todasMasterizadas = window.habilidadesData.habilidades.every(habilidade => {
+                const status = calcularStatusHabilidade(habilidade, data);
+                return status === 'mastered';
+            });
+            
+            if (todasMasterizadas) {
+                // Mostrar botão de conclusão
+                mostrarBotaoConclusao();
+            }
+        }
+        
+        function mostrarBotaoConclusao() {
+            // Verificar se o botão já existe
+            let botaoConclusao = document.getElementById('botao-conclusao');
+            if (botaoConclusao) return;
+            
+            // Criar botão de conclusão
+            botaoConclusao = document.createElement('button');
+            botaoConclusao.id = 'botao-conclusao';
+            botaoConclusao.innerHTML = '🎉 Concluir Árvore de Habilidades';
+            botaoConclusao.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, #FFD700, #FFA500);
+                color: #333;
+                border: none;
+                padding: 15px 25px;
+                border-radius: 25px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+                z-index: 1000;
+                animation: pulse 2s infinite;
+            `;
+            
+            // Adicionar animação CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Adicionar evento de clique
+            botaoConclusao.addEventListener('click', () => {
+                if (confirm('🎉 Parabéns! Você masterizou todas as habilidades!\n\nDeseja concluir sua jornada na árvore de habilidades?')) {
+                    // Redirecionar para a tela de parabéns
+                    window.location.href = 'http://localhost:3000/Just-dreams-main/JustDreams/parabens_jornada.html';
+                }
+            });
+            
+            document.body.appendChild(botaoConclusao);
+        }
+
+        function mostrarErro(mensagem) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('error').textContent = mensagem;
+        }
+        
+        function simularMasterizacao() {
+            if (!window.habilidadesData) {
+                alert('Dados não carregados ainda. Aguarde um momento.');
+                return;
+            }
+            
+            // Simular dados de alta performance para masterizar todas as habilidades
+            window.habilidadesData.xpTotal = 10000; // XP muito alto
+            window.habilidadesData.taxaAcerto = 95; // Taxa de acerto alta
+            window.habilidadesData.totalSessoes = 20; // Muitas sessões
+            
+            // Atualizar a exibição
+            atualizarEstatisticas(window.habilidadesData);
+            recriarArvore();
+            
+            // Verificar conclusão
+            verificarConclusaoArvore();
+            
+            alert('🎉 Todas as habilidades foram masterizadas! Verifique o botão de conclusão no canto superior direito.');
+        }
+        
+        function recriarArvore() {
+            const container = document.getElementById('arvore');
+            container.innerHTML = '';
+            
+            // Recriar todos os nós
+            window.habilidadesData.habilidades.forEach(habilidade => {
+                const node = criarNoHabilidade(habilidade);
+                container.appendChild(node);
+            });
+            
+            // Recriar as linhas de conexão
+            adicionarLinhasConexao();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+/* ========================================
+   PÁGINAS - LOGIN E CADASTRO
+   ======================================== */
+
+/* Container principal */
+.container {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  height: 80vh;
+  border-radius: var(--border-radius-2xl);
+  box-shadow: var(--shadow-game);
+  background: var(--color-secondary);
+  overflow: hidden;
+  color: var(--text-primary);
+}
+
+/* Painel esquerdo */
+.left-panel {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-3xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.left-panel::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 85, 194, 0.1) 0%, transparent 70%);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Container do logo */
+.logo-container {
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+  z-index: 1;
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-normal);
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* Título do jogo */
+.game-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Títulos principais */
+.left-panel h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.left-panel p {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+/* Painel direito */
+.right-panel {
+  width: 50%;
+  padding: var(--spacing-3xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--color-secondary);
+  position: relative;
+}
+
+.right-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 85, 194, 0.05));
+  pointer-events: none;
+}
+
+/* Título do painel direito */
+.right-panel h2 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Formulário */
+#aluno-login-form,
+#professor-login-form,
+#aluno-cadastro-form,
+#professor-cadastro-form {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .container {
+    width: 95%;
+    height: 85vh;
+  }
+  
+  .left-panel,
+  .right-panel {
+    padding: var(--spacing-xl);
+  }
+  
+  .left-panel h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .right-panel h2 {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    padding: var(--spacing-xl);
+  }
+  
+  .left-panel {
+    min-height: 40vh;
+    padding: var(--spacing-lg);
+  }
+  
+  .right-panel {
+    min-height: 60vh;
+    padding: var(--spacing-lg);
+  }
+  
+  .logo {
+    max-width: 150px;
+  }
+  
+  .left-panel h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .right-panel h2 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .left-panel p {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+  
+  .left-panel,
+  .right-panel {
+    padding: var(--spacing-md);
+  }
+  
+  .left-panel {
+    min-height: 35vh;
+  }
+  
+  .right-panel {
+    min-height: 65vh;
+  }
+  
+  .logo {
+    max-width: 120px;
+  }
+  
+  .left-panel h1 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .right-panel h2 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .game-title {
+    font-size: var(--font-size-2xl);
+  }
+}

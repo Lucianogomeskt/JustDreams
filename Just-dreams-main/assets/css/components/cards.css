@@ -1,0 +1,319 @@
+/* ========================================
+   COMPONENTES - CARDS
+   ======================================== */
+
+/* Card base */
+.card {
+  background-color: var(--color-accent);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border);
+}
+
+/* Card de paciente */
+.patient-card {
+  background-color: var(--color-accent);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.patient-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-highlight), var(--color-border));
+}
+
+.patient-name {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-highlight);
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-heading);
+}
+
+.patient-image {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--border-radius-full);
+  object-fit: cover;
+  border: 4px solid var(--color-border);
+  margin: 0 auto var(--spacing-lg);
+  display: block;
+  transition: transform var(--transition-normal);
+}
+
+.patient-image:hover {
+  transform: scale(1.05);
+}
+
+/* Card de profissão */
+.profession-card {
+  background-color: var(--color-accent);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.profession-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
+}
+
+.profession-card.selected {
+  border-color: var(--color-highlight);
+  background: linear-gradient(135deg, var(--color-highlight), #e04a9a);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-xl);
+}
+
+.profession-card .profession-icon {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+.profession-card .profession-name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-heading);
+}
+
+.profession-card .profession-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Card de personagem */
+.character-card {
+  background-color: var(--color-accent);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.character-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
+}
+
+.character-card.selected {
+  border-color: var(--color-highlight);
+  background: linear-gradient(135deg, var(--color-highlight), #e04a9a);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-xl);
+}
+
+.character-card .character-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--border-radius-full);
+  object-fit: cover;
+  margin: 0 auto var(--spacing-md);
+  display: block;
+  border: 3px solid var(--color-border);
+  transition: transform var(--transition-normal);
+}
+
+.character-card:hover .character-avatar {
+  transform: scale(1.1);
+}
+
+.character-card .character-name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-heading);
+}
+
+.character-card .character-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Card de estatísticas */
+.stats-card {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stats-card .stats-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+  font-family: var(--font-heading);
+}
+
+.stats-card .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.stats-card .stat-item {
+  text-align: center;
+  padding: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+}
+
+.stats-card .stat-value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-highlight);
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stats-card .stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Card de conquista */
+.achievement-card {
+  background: linear-gradient(135deg, var(--color-success), #4a9d63);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.achievement-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+}
+
+.achievement-card .achievement-icon {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+.achievement-card .achievement-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-heading);
+}
+
+.achievement-card .achievement-description {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .card,
+  .patient-card,
+  .stats-card {
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .profession-card,
+  .character-card {
+    padding: var(--spacing-md);
+  }
+  
+  .patient-name {
+    font-size: var(--font-size-xl);
+  }
+  
+  .patient-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .character-card .character-avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .stats-card .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .card,
+  .patient-card,
+  .stats-card {
+    padding: var(--spacing-md);
+  }
+  
+  .profession-card,
+  .character-card {
+    padding: var(--spacing-sm);
+  }
+  
+  .patient-name {
+    font-size: var(--font-size-lg);
+  }
+  
+  .patient-image {
+    width: 80px;
+    height: 80px;
+  }
+}

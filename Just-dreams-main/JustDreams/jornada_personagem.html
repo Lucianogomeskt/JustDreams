@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada do Personagem - Just Dreams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .character-info {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .character-avatar {
+            font-size: 3rem;
+            background: rgba(255,255,255,0.3);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .character-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .character-details p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .journey-progress {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            height: 100%;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .phase-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #4facfe;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .phase-card.completed {
+            border-left-color: #28a745;
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        }
+
+        .phase-card.current {
+            border-left-color: #ffc107;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+        }
+
+        .phase-card.locked {
+            border-left-color: #6c757d;
+            background: #f8f9fa;
+            opacity: 0.6;
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .phase-status {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-current {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-locked {
+            background: #e2e3e5;
+            color: #6c757d;
+        }
+
+        .phase-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .phase-objectives {
+            margin-bottom: 20px;
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .objective-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .objective-completed {
+            color: #28a745;
+        }
+
+        .objective-pending {
+            color: #6c757d;
+        }
+
+        .phase-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-phase {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-continue {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-disabled {
+            background: #6c757d;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .achievements {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .achievements h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .achievement-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .achievement-item.earned {
+            border-color: #ffc107;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .achievement-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .achievement-desc {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .btn-back {
+            background: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #5a6268;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .character-info {
+                position: static;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            
+            .phases-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .phase-actions {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌟 Jornada do Personagem</h1>
+            <p>Sua aventura de aprendizado com matemática</p>
+            
+            <div class="character-info">
+                <div class="character-avatar" id="character-avatar">👦</div>
+                <div class="character-details">
+                    <h3 id="character-name">João</h3>
+                    <p id="character-profession">Médico</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <button class="btn-back" onclick="window.location.href='http://localhost:3000/Just-dreams-main/Jogo/game.html'">← Voltar ao Jogo</button>
+            
+            <div id="loading" class="loading">
+                Carregando sua jornada...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="journey-progress">
+                    <h3>📊 Progresso da Jornada</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                        <div class="progress-text" id="progress-text">0%</div>
+                    </div>
+                    <p id="progress-description">Complete as fases para progredir em sua jornada!</p>
+                </div>
+
+                <div class="phases-grid" id="phases-grid">
+                    <!-- Fases serão carregadas aqui -->
+                </div>
+
+                <div class="achievements">
+                    <h3>🏆 Conquistas</h3>
+                    <div class="achievements-grid" id="achievements-grid">
+                        <!-- Conquistas serão carregadas aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let personagemEscolhido = null;
+        let profissaoEscolhida = null;
+        let fasesCompletadas = 0;
+        let totalFases = 0;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar se o usuário está logado
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (!token || user.tipo !== 'aluno') {
+                alert('Você precisa estar logado como aluno!');
+                window.location.href = 'aluno_login.html';
+                return;
+            }
+
+            // Carregar informações do personagem e profissão (específico para o usuário)
+            const personagemKey = `personagemEscolhido_${user.id}`;
+            const profissaoKey = `profissaoEscolhida_${user.id}`;
+            personagemEscolhido = localStorage.getItem(personagemKey);
+            profissaoEscolhida = localStorage.getItem(profissaoKey);
+            
+            if (!personagemEscolhido || !profissaoEscolhida) {
+                alert('Por favor, escolha seu personagem e profissão primeiro!');
+                window.location.href = 'escolha_profissao.html';
+                return;
+            }
+
+            // Configurar informações do personagem
+            configurarPersonagem();
+
+            // Carregar jornada
+            carregarJornada();
+        });
+
+        function configurarPersonagem() {
+            const personagens = {
+                'joao': { nome: 'João', avatar: '👦' },
+                'maria': { nome: 'Maria', avatar: '👧' },
+                'pedro': { nome: 'Pedro', avatar: '🧑' },
+                'ana': { nome: 'Ana', avatar: '👩' },
+                'lucas': { nome: 'Lucas', avatar: '👨' },
+                'sofia': { nome: 'Sofia', avatar: '👩‍🎓' }
+            };
+
+            const profissoes = {
+                'medico': { nome: 'Médico' },
+                'engenheiro': { nome: 'Engenheiro' },
+                'astronauta': { nome: 'Astronauta' },
+                'chef': { nome: 'Chef' },
+                'artista': { nome: 'Artista' },
+                'cientista': { nome: 'Cientista' }
+            };
+
+            const personagemInfo = personagens[personagemEscolhido] || { nome: 'Personagem', avatar: '👤' };
+            const profissaoInfo = profissoes[profissaoEscolhida] || { nome: 'Profissão' };
+
+            document.getElementById('character-avatar').textContent = personagemInfo.avatar;
+            document.getElementById('character-name').textContent = personagemInfo.nome;
+            document.getElementById('character-profession').textContent = profissaoInfo.nome;
+        }
+
+        function carregarJornada() {
+            // Simular carregamento
+            setTimeout(() => {
+                exibirJornada();
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            }, 1000);
+        }
+
+        function exibirJornada() {
+            // Verificar se o usuário completou o jogo recentemente (específico para o usuário)
+            const jogoCompletadoKey = `jogoCompletado_${user.id}`;
+            const faseKey = `faseAtual_${user.id}`;
+            const jogoCompletado = localStorage.getItem(jogoCompletadoKey);
+            const faseAtual = parseInt(localStorage.getItem(faseKey) || '1');
+            
+            // Dados simulados da jornada
+            const jornada = {
+                fases: [
+                    {
+                        id: 1,
+                        titulo: 'Primeiros Passos',
+                        descricao: 'Aprenda o básico da matemática e comece sua jornada profissional.',
+                        objetivos: [
+                            { texto: 'Resolver 10 problemas de adição', completado: faseAtual > 1 || jogoCompletado },
+                            { texto: 'Resolver 10 problemas de subtração', completado: faseAtual > 1 || jogoCompletado },
+                            { texto: 'Obter 80% de acerto', completado: faseAtual > 1 || jogoCompletado }
+                        ],
+                        status: faseAtual > 1 || jogoCompletado ? 'completed' : 'current'
+                    },
+                    {
+                        id: 2,
+                        titulo: 'Desenvolvimento',
+                        descricao: 'Aprofunde seus conhecimentos e desenvolva suas habilidades.',
+                        objetivos: [
+                            { texto: 'Resolver 15 problemas de multiplicação', completado: faseAtual > 2 },
+                            { texto: 'Resolver 15 problemas de divisão', completado: faseAtual > 2 },
+                            { texto: 'Obter 85% de acerto', completado: faseAtual > 2 }
+                        ],
+                        status: faseAtual > 2 ? 'completed' : (faseAtual === 2 ? 'current' : 'locked')
+                    },
+                    {
+                        id: 3,
+                        titulo: 'Especialização',
+                        descricao: 'Torne-se um especialista em sua área de atuação.',
+                        objetivos: [
+                            { texto: 'Resolver 20 problemas complexos', completado: faseAtual > 3 },
+                            { texto: 'Obter 90% de acerto', completado: faseAtual > 3 },
+                            { texto: 'Completar em menos de 5 minutos', completado: faseAtual > 3 }
+                        ],
+                        status: faseAtual > 3 ? 'completed' : (faseAtual === 3 ? 'current' : 'locked')
+                    },
+                    {
+                        id: 4,
+                        titulo: 'Mestria',
+                        descricao: 'Alcance o nível de mestre em sua profissão.',
+                        objetivos: [
+                            { texto: 'Resolver 25 problemas avançados', completado: faseAtual > 4 },
+                            { texto: 'Obter 95% de acerto', completado: faseAtual > 4 },
+                            { texto: 'Completar em menos de 3 minutos', completado: faseAtual > 4 }
+                        ],
+                        status: faseAtual > 4 ? 'completed' : (faseAtual === 4 ? 'current' : 'locked')
+                    }
+                ],
+                conquistas: [
+                    { id: 1, titulo: 'Primeiro Passo', descricao: 'Complete sua primeira fase', icon: '🎯', ganha: faseAtual > 1 },
+                    { id: 2, titulo: 'Matemático', descricao: 'Resolva 50 problemas', icon: '🧮', ganha: faseAtual > 2 },
+                    { id: 3, titulo: 'Velocista', descricao: 'Complete uma fase em menos de 2 minutos', icon: '⚡', ganha: faseAtual > 3 },
+                    { id: 4, titulo: 'Perfeccionista', descricao: 'Obtenha 100% de acerto em uma fase', icon: '💯', ganha: faseAtual > 3 },
+                    { id: 5, titulo: 'Mestre', descricao: 'Complete toda a jornada', icon: '👑', ganha: faseAtual > 4 }
+                ]
+            };
+
+            // Calcular progresso
+            fasesCompletadas = jornada.fases.filter(fase => fase.status === 'completed').length;
+            totalFases = jornada.fases.length;
+            const progresso = (fasesCompletadas / totalFases) * 100;
+
+            // Atualizar barra de progresso
+            document.getElementById('progress-fill').style.width = progresso + '%';
+            document.getElementById('progress-text').textContent = Math.round(progresso) + '%';
+            document.getElementById('progress-description').textContent = 
+                `${fasesCompletadas} de ${totalFases} fases completadas`;
+
+            // Exibir fases
+            exibirFases(jornada.fases);
+
+            // Exibir conquistas
+            exibirConquistas(jornada.conquistas);
+        }
+
+        function exibirFases(fases) {
+            const container = document.getElementById('phases-grid');
+            container.innerHTML = '';
+
+            fases.forEach(fase => {
+                const faseCard = document.createElement('div');
+                faseCard.className = `phase-card ${fase.status}`;
+                
+                const objetivosHtml = fase.objetivos.map(obj => `
+                    <div class="objective-item">
+                        <span class="objective-icon ${obj.completado ? 'objective-completed' : 'objective-pending'}">
+                            ${obj.completado ? '✅' : '⭕'}
+                        </span>
+                        <span class="${obj.completado ? 'objective-completed' : 'objective-pending'}">
+                            ${obj.texto}
+                        </span>
+                    </div>
+                `).join('');
+
+                const statusText = {
+                    'completed': 'Concluída',
+                    'current': 'Em Andamento',
+                    'locked': 'Bloqueada'
+                };
+
+                const statusClass = {
+                    'completed': 'status-completed',
+                    'current': 'status-current',
+                    'locked': 'status-locked'
+                };
+
+                faseCard.innerHTML = `
+                    <div class="phase-header">
+                        <div class="phase-title">${fase.titulo}</div>
+                        <div class="phase-status ${statusClass[fase.status]}">
+                            ${statusText[fase.status]}
+                        </div>
+                    </div>
+                    <div class="phase-description">${fase.descricao}</div>
+                    <div class="phase-objectives">
+                        ${objetivosHtml}
+                    </div>
+                    <div class="phase-actions">
+                        ${fase.status === 'completed' ? 
+                            '<button class="btn-phase btn-continue" onclick="jogarFase(' + fase.id + ')">Jogar Novamente</button>' :
+                            fase.status === 'current' ?
+                            '<button class="btn-phase btn-start" onclick="jogarFase(' + fase.id + ')">Continuar</button>' :
+                            '<button class="btn-phase btn-disabled" disabled>Bloqueada</button>'
+                        }
+                    </div>
+                `;
+
+                container.appendChild(faseCard);
+            });
+        }
+
+        function exibirConquistas(conquistas) {
+            const container = document.getElementById('achievements-grid');
+            container.innerHTML = '';
+
+            conquistas.forEach(conquista => {
+                const achievementCard = document.createElement('div');
+                achievementCard.className = `achievement-item ${conquista.ganha ? 'earned' : ''}`;
+                
+                achievementCard.innerHTML = `
+                    <div class="achievement-icon">${conquista.icon}</div>
+                    <div class="achievement-title">${conquista.titulo}</div>
+                    <div class="achievement-desc">${conquista.descricao}</div>
+                `;
+
+                container.appendChild(achievementCard);
+            });
+        }
+
+        function jogarFase(faseId) {
+            // Verificar se a jornada foi completada
+            if (faseId === totalFases && fasesCompletadas === totalFases - 1) {
+                // Última fase - verificar se completou
+                if (confirm('Esta é a última fase! Ao completá-la, você finalizará sua jornada. Deseja continuar?')) {
+                    window.location.href = 'http://localhost:3000/Just-dreams-main/Jogo/game.html';
+                }
+            } else {
+                window.location.href = 'http://localhost:3000/Just-dreams-main/Jogo/game.html';
+            }
+        }
+
+        // Verificar se a jornada foi completada
+        function verificarJornadaCompleta() {
+            if (fasesCompletadas === totalFases) {
+                // Redirecionar para página de parabéns
+                setTimeout(() => {
+                    window.location.href = 'parabens_jornada.html';
+                }, 2000);
+            }
+        }
+
+        // Verificar jornada completa ao carregar
+        setTimeout(verificarJornadaCompleta, 2000);
+    </script>
+</body>
+</html>

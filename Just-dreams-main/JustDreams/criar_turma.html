@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Turma - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../images/JTFavicon.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .btn-voltar {
+            background: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: #5a6268;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group .help-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-submit:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .codigo-display {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #495057;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .codigo-display.ativo {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>➕ Criar Nova Turma</h1>
+            <p>Digite a turma no formato 1°A, 2°B, 3°C - o código será gerado automaticamente!</p>
+        </div>
+        
+        <div class="content">
+            <button class="btn-voltar" onclick="window.location.href='gerenciar_turmas.html'">← Voltar</button>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            <div id="success" class="success" style="display: none;"></div>
+            
+            <form id="criar-turma-form">
+                <div class="form-group">
+                    <label for="nome">Nome da Turma *</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Ex: 1°A, 2°B, 3°C" pattern="[0-9]+°[A-Za-z]" title="Formato: número + ° + letra (ex: 1°A)">
+                    <div class="help-text">Digite a turma no formato: número + ° + letra (ex: 1°A, 2°B, 3°C)</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Código da Turma (Gerado Automaticamente)</label>
+                    <div id="codigo-gerado" class="codigo-display">
+                        Digite a turma para ver o código
+                    </div>
+                    <div class="help-text">Este código será usado pelos alunos para se inscrever na turma</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" name="descricao" placeholder="Descreva os objetivos e características desta turma..."></textarea>
+                    <div class="help-text">Opcional: Adicione uma descrição detalhada da turma</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nivel">Nível de Ensino</label>
+                        <select id="nivel" name="nivel">
+                            <option value="">Selecione o nível</option>
+                            <option value="educacao-infantil">Educação Infantil</option>
+                            <option value="1-ano">1º Ano</option>
+                            <option value="2-ano">2º Ano</option>
+                            <option value="3-ano">3º Ano</option>
+                            <option value="4-ano">4º Ano</option>
+                            <option value="5-ano">5º Ano</option>
+                            <option value="6-ano">6º Ano</option>
+                            <option value="7-ano">7º Ano</option>
+                            <option value="8-ano">8º Ano</option>
+                            <option value="9-ano">9º Ano</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="capacidade">Capacidade Máxima</label>
+                        <input type="number" id="capacidade" name="capacidade" min="1" max="50" value="30" placeholder="30">
+                        <div class="help-text">Número máximo de alunos</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="turno">Turno</label>
+                    <select id="turno" name="turno">
+                        <option value="">Selecione o turno</option>
+                        <option value="manha">Manhã</option>
+                        <option value="tarde">Tarde</option>
+                        <option value="noite">Noite</option>
+                        <option value="integral">Integral</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn-submit">
+                    Criar Turma
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Função para gerar código da turma (mesma lógica do backend)
+        function gerarCodigoTurma(nome) {
+            if (!nome || nome.trim() === '') return '';
+            
+            // Para o formato 1°A, usar o próprio nome como base
+            // Remover o símbolo ° e adicionar timestamp
+            let codigo = nome.replace('°', '');
+            const timestamp = Date.now().toString().slice(-4);
+            codigo += timestamp;
+            
+            return codigo;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar se o usuário está logado
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (!token || user.tipo !== 'professor') {
+                alert('Você precisa estar logado como professor!');
+                window.location.href = 'professor_login.html';
+                return;
+            }
+
+            const form = document.getElementById('criar-turma-form');
+            const nomeInput = document.getElementById('nome');
+            const codigoDisplay = document.getElementById('codigo-gerado');
+
+            // Gerar código em tempo real quando o nome mudar
+            nomeInput.addEventListener('input', (e) => {
+                const nome = e.target.value;
+                const codigo = gerarCodigoTurma(nome);
+                
+                if (codigo) {
+                    codigoDisplay.textContent = codigo;
+                    codigoDisplay.classList.add('ativo');
+                } else {
+                    codigoDisplay.textContent = 'Digite a turma para ver o código';
+                    codigoDisplay.classList.remove('ativo');
+                }
+            });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await criarTurma();
+            });
+        });
+
+        async function criarTurma() {
+            const form = document.getElementById('criar-turma-form');
+            const formData = new FormData(form);
+            
+            const turmaData = {
+                nome: formData.get('nome'),
+                descricao: formData.get('descricao'),
+                nivel: formData.get('nivel'),
+                capacidade: parseInt(formData.get('capacidade')),
+                turno: formData.get('turno')
+            };
+
+            // Validar dados obrigatórios
+            if (!turmaData.nome || turmaData.nome.trim() === '') {
+                mostrarErro('O nome da turma é obrigatório.');
+                return;
+            }
+
+            // Validar formato da turma (número + ° + letra)
+            const turmaRegex = /^[0-9]+°[A-Za-z]$/;
+            if (!turmaRegex.test(turmaData.nome.trim())) {
+                mostrarErro('A turma deve estar no formato: número + ° + letra (ex: 1°A, 2°B, 3°C).');
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+            const btnSubmit = document.getElementById('btn-submit');
+            
+            try {
+                btnSubmit.disabled = true;
+                btnSubmit.textContent = 'Criando...';
+
+                const response = await fetch('http://localhost:3000/api/turmas', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(turmaData)
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    mostrarSucesso(`Turma criada com sucesso! Código: ${data.data.codigo}`);
+                    form.reset();
+                    
+                    // Redirecionar após 3 segundos
+                    setTimeout(() => {
+                        window.location.href = 'gerenciar_turmas.html';
+                    }, 3000);
+                } else {
+                    mostrarErro('Erro ao criar turma: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                mostrarErro('Erro de conexão. Verifique se o servidor está rodando.');
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = 'Criar Turma';
+            }
+        }
+
+        function mostrarErro(mensagem) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = mensagem;
+            errorDiv.style.display = 'block';
+            
+            const successDiv = document.getElementById('success');
+            successDiv.style.display = 'none';
+        }
+
+        function mostrarSucesso(mensagem) {
+            const successDiv = document.getElementById('success');
+            successDiv.textContent = mensagem;
+            successDiv.style.display = 'block';
+            
+            const errorDiv = document.getElementById('error');
+            errorDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

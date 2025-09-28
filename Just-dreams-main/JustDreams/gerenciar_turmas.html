@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Turmas - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../images/JTFavicon.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .btn-voltar {
+            background: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: #5a6268;
+        }
+
+        .btn-criar {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-criar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .turmas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .turma-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #4facfe;
+            transition: transform 0.3s;
+        }
+
+        .turma-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .turma-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .turma-info {
+            margin-bottom: 20px;
+        }
+
+        .turma-info p {
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .turma-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .btn-primary {
+            background: #4facfe;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .turmas-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .turma-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Gerenciar Turmas</h1>
+            <p>Visualize e gerencie todas as suas turmas</p>
+        </div>
+        
+        <div class="content">
+            <button class="btn-voltar" onclick="window.location.href='professor_dashboard.html'">← Voltar ao Dashboard</button>
+            
+            <button class="btn-criar" onclick="window.location.href='criar_turma.html'">
+                ➕ Criar Nova Turma
+            </button>
+            
+            <div id="loading" class="loading">
+                Carregando turmas...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="turmas-container" style="display: none;">
+                <div class="turmas-grid" id="turmas-grid">
+                    <!-- Turmas serão carregadas aqui -->
+                </div>
+            </div>
+            
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <h3>Nenhuma turma encontrada</h3>
+                <p>Você ainda não criou nenhuma turma. Clique no botão acima para criar sua primeira turma!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Verificar se o usuário está logado
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (!token || user.tipo !== 'professor') {
+                alert('Você precisa estar logado como professor!');
+                window.location.href = 'professor_login.html';
+                return;
+            }
+
+            try {
+                await carregarTurmas();
+            } catch (error) {
+                console.error('Erro ao carregar turmas:', error);
+                mostrarErro('Erro ao carregar turmas. Tente novamente.');
+            }
+        });
+
+        async function carregarTurmas() {
+            const token = localStorage.getItem('token');
+            
+            try {
+                console.log('Carregando turmas...');
+                const response = await fetch('http://localhost:3000/api/turmas', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                console.log('Response status:', response.status);
+                const data = await response.json();
+                console.log('Dados recebidos:', data);
+                
+                if (data.success) {
+                    console.log('Turmas encontradas:', data.data);
+                    exibirTurmas(data.data);
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar turmas:', error);
+                // Mostrar turmas simuladas em caso de erro
+                exibirTurmasSimuladas();
+            }
+        }
+
+        function exibirTurmas(turmas) {
+            document.getElementById('loading').style.display = 'none';
+            
+            if (turmas && turmas.length > 0) {
+                document.getElementById('turmas-container').style.display = 'block';
+                
+                const turmasGrid = document.getElementById('turmas-grid');
+                turmasGrid.innerHTML = '';
+                
+                turmas.forEach(turma => {
+                    const turmaCard = document.createElement('div');
+                    turmaCard.className = 'turma-card';
+                    turmaCard.innerHTML = `
+                        <h3>${turma.nome}</h3>
+                        <div class="turma-info">
+                            <p><strong>Descrição:</strong> ${turma.descricao || 'Sem descrição'}</p>
+                            <p><strong>Alunos:</strong> ${turma.total_alunos || 0}</p>
+                            <p><strong>Criada em:</strong> ${new Date(turma.created_at).toLocaleDateString('pt-BR')}</p>
+                        </div>
+                        <div class="turma-actions">
+                            <button class="btn-action btn-primary" onclick="verDetalhes(${turma.id})">
+                                Ver Detalhes
+                            </button>
+                            <button class="btn-action btn-secondary" onclick="editarTurma(${turma.id})">
+                                Editar
+                            </button>
+                            <button class="btn-action btn-danger" onclick="excluirTurma(${turma.id})" id="btn-excluir-${turma.id}">
+                                Excluir
+                            </button>
+                        </div>
+                    `;
+                    turmasGrid.appendChild(turmaCard);
+                });
+            } else {
+                document.getElementById('empty-state').style.display = 'block';
+            }
+        }
+
+        function exibirTurmasSimuladas() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('turmas-container').style.display = 'block';
+            
+            const turmasSimuladas = [
+                {
+                    id: 1,
+                    nome: 'Matemática Básica',
+                    descricao: 'Turma para alunos do 1º ao 3º ano',
+                    total_alunos: 15,
+                    created_at: new Date().toISOString()
+                },
+                {
+                    id: 2,
+                    nome: 'Matemática Avançada',
+                    descricao: 'Turma para alunos do 4º ao 6º ano',
+                    total_alunos: 12,
+                    created_at: new Date().toISOString()
+                }
+            ];
+            
+            exibirTurmas(turmasSimuladas);
+        }
+
+        function mostrarErro(mensagem) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('error').textContent = mensagem;
+        }
+
+        function verDetalhes(turmaId) {
+            window.location.href = `detalhes_turma.html?id=${turmaId}`;
+        }
+
+        function editarTurma(turmaId) {
+            // Por enquanto, redirecionar para uma página de edição simples
+            // ou mostrar um modal de edição
+            const novoNome = prompt('Digite o novo nome da turma:');
+            if (novoNome && novoNome.trim() !== '') {
+                // Implementar edição via API
+                alert(`Funcionalidade de edição será implementada em breve. Turma ID: ${turmaId}, Novo nome: ${novoNome}`);
+            }
+        }
+
+        async function excluirTurma(turmaId) {
+            console.log('=== FUNÇÃO EXCLUIR TURMA CHAMADA ===');
+            console.log('Tentando excluir turma ID:', turmaId);
+            console.log('Tipo do ID:', typeof turmaId);
+            
+            // Teste simples primeiro
+            alert(`Função chamada para turma ID: ${turmaId}`);
+            
+            if (confirm('Tem certeza que deseja excluir esta turma? Esta ação não pode ser desfeita.')) {
+                const token = localStorage.getItem('token');
+                console.log('Token encontrado:', token ? 'Sim' : 'Não');
+                
+                // Mostrar loading
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('turmas-container').style.display = 'none';
+                document.getElementById('empty-state').style.display = 'none';
+                
+                try {
+                    console.log('Fazendo requisição DELETE para:', `http://localhost:3000/api/turmas/${turmaId}`);
+                    
+                    const response = await fetch(`http://localhost:3000/api/turmas/${turmaId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    console.log('Response status:', response.status);
+                    const data = await response.json();
+                    console.log('Response data:', data);
+                    
+                    if (data.success) {
+                        alert('Turma excluída com sucesso!');
+                        // Recarregar a lista de turmas
+                        await carregarTurmas();
+                    } else {
+                        alert('Erro ao excluir turma: ' + data.message);
+                        // Mostrar turmas novamente em caso de erro
+                        await carregarTurmas();
+                    }
+                } catch (error) {
+                    console.error('Erro ao excluir turma:', error);
+                    alert('Erro de conexão. Verifique se o servidor está rodando.');
+                    // Mostrar turmas novamente em caso de erro
+                    await carregarTurmas();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

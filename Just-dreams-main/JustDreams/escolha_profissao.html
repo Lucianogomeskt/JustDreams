@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha sua Profissão - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../images/JTFavicon.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .welcome-section p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .profissoes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .profissao-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profissao-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: #4facfe;
+        }
+
+        .profissao-card.selected {
+            border-color: #4facfe;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .profissao-card.selected .profissao-emoji {
+            transform: scale(1.2);
+        }
+
+        .profissao-emoji {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .profissao-nome {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .profissao-card.selected .profissao-nome {
+            color: white;
+        }
+
+        .profissao-descricao {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .profissao-card.selected .profissao-descricao {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .btn-continuar {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .btn-continuar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-continuar:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .user-info {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .user-info h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .user-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .profissoes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Escolha sua Profissão</h1>
+            <p>Selecione a profissão que você gostaria de exercer no jogo</p>
+        </div>
+        
+        <div class="content">
+            <div id="loading" class="loading">
+                Carregando...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="user-info">
+                    <h3 id="user-name">Carregando...</h3>
+                    <p>Bem-vindo ao Just Dreams! Escolha sua profissão para começar a aventura.</p>
+                </div>
+
+                <div class="welcome-section">
+                    <h2>🚀 Que profissão você quer ser?</h2>
+                    <p>Escolha uma das profissões abaixo e comece sua jornada de aprendizado com matemática!</p>
+                </div>
+
+                <div class="profissoes-grid">
+                    <div class="profissao-card" data-profissao="medico">
+                        <div class="profissao-emoji">👨‍⚕️</div>
+                        <div class="profissao-nome">Médico</div>
+                        <div class="profissao-descricao">
+                            Cure pacientes resolvendo problemas matemáticos. Use a matemática para calcular dosagens e diagnósticos.
+                        </div>
+                    </div>
+
+                    <div class="profissao-card" data-profissao="engenheiro">
+                        <div class="profissao-emoji">👷‍♂️</div>
+                        <div class="profissao-nome">Engenheiro</div>
+                        <div class="profissao-descricao">
+                            Construa estruturas incríveis resolvendo cálculos matemáticos. A matemática é fundamental na engenharia!
+                        </div>
+                    </div>
+
+                    <div class="profissao-card" data-profissao="astronauta">
+                        <div class="profissao-emoji">🚀</div>
+                        <div class="profissao-nome">Astronauta</div>
+                        <div class="profissao-descricao">
+                            Explore o espaço calculando trajetórias e distâncias. A matemática te levará às estrelas!
+                        </div>
+                    </div>
+
+                    <div class="profissao-card" data-profissao="chef">
+                        <div class="profissao-emoji">👨‍🍳</div>
+                        <div class="profissao-nome">Chef</div>
+                        <div class="profissao-descricao">
+                            Crie pratos deliciosos calculando ingredientes e proporções. A matemática está na cozinha!
+                        </div>
+                    </div>
+
+                    <div class="profissao-card" data-profissao="artista">
+                        <div class="profissao-emoji">🎨</div>
+                        <div class="profissao-nome">Artista</div>
+                        <div class="profissao-descricao">
+                            Crie obras de arte usando geometria e proporções matemáticas. A arte e a matemática se encontram!
+                        </div>
+                    </div>
+
+                    <div class="profissao-card" data-profissao="cientista">
+                        <div class="profissao-emoji">🔬</div>
+                        <div class="profissao-nome">Cientista</div>
+                        <div class="profissao-descricao">
+                            Faça descobertas incríveis através de cálculos e experimentos. A matemática é a linguagem da ciência!
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-continuar" id="btn-continuar" disabled onclick="continuar()">
+                    Continuar para Escolha do Personagem
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let profissaoSelecionada = null;
+        let user = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar se o usuário está logado
+            const token = localStorage.getItem('token');
+            user = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (!token || user.tipo !== 'aluno') {
+                alert('Você precisa estar logado como aluno!');
+                window.location.href = 'aluno_login.html';
+                return;
+            }
+
+            // Exibir informações do usuário
+            document.getElementById('user-name').textContent = `Olá, ${user.nome}!`;
+
+            // Configurar seleção de profissões
+            configurarSelecaoProfissoes();
+
+            // Ocultar loading e mostrar conteúdo
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        });
+
+        function configurarSelecaoProfissoes() {
+            const cards = document.querySelectorAll('.profissao-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Remover seleção anterior
+                    cards.forEach(c => c.classList.remove('selected'));
+                    
+                    // Selecionar nova profissão
+                    card.classList.add('selected');
+                    profissaoSelecionada = card.dataset.profissao;
+                    
+                    // Habilitar botão continuar
+                    document.getElementById('btn-continuar').disabled = false;
+                });
+            });
+        }
+
+        function continuar() {
+            if (!profissaoSelecionada) {
+                alert('Por favor, selecione uma profissão!');
+                return;
+            }
+
+            // Verificar se o usuário está definido
+            if (!user || !user.id) {
+                alert('Erro: Usuário não encontrado. Faça login novamente.');
+                window.location.href = 'aluno_login.html';
+                return;
+            }
+
+            // Salvar profissão escolhida no localStorage (específico para o usuário)
+            const profissaoKey = `profissaoEscolhida_${user.id}`;
+            localStorage.setItem(profissaoKey, profissaoSelecionada);
+            
+            console.log('Profissão salva:', profissaoSelecionada, 'para usuário:', user.id);
+            
+            // Redirecionar para escolha do personagem
+            window.location.href = 'escolha_personagem.html';
+        }
+    </script>
+</body>
+</html>
