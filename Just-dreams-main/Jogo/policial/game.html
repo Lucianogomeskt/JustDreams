@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Dreams - Detetive Mirim</title>
+    <link rel="icon" type="image/png" href="../../images/JTFavicon.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style-game.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1 id="game-title">Detetive Mirim!</h1>
+            <p id="game-subtitle">Encontre os objetos que não pertencem ao trabalho policial!</p>
+            <div class="character-info">
+                <div class="character-avatar" id="character-avatar">👮</div>
+                <div class="character-details">
+                    <div class="character-name" id="character-name">Detetive</div>
+                    <div class="character-profession" id="character-profession">Investigador</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="patient-card">
+            <div class="patient-name">Caso "Objetos Suspeitos"</div>
+            <div class="health-bar-container">
+                <div class="health-bar-label">Investigação:</div>
+                <div id="health-bar" class="health-bar"></div>
+            </div>
+            <div class="patient-avatar">👮</div>
+        </div>
+
+        <div class="question-area">
+            <h3 id="mission-text">Clique em "Iniciar Jogo" para começar sua investigação!</h3>
+            <div id="scene-container">
+                <div id="scene"></div>
+            </div>
+            <div id="score-display">Pontuação: 0</div>
+        </div>
+
+        <div class="game-controls">
+            <button id="start-button" class="game-button primary">Iniciar Jogo</button>
+            <button id="reset-button" class="game-button secondary" disabled>Reiniciar Jogo</button>
+            <button id="advance-button" class="game-button success" style="display: none;">Avançar para Próxima Fase</button>
+        </div>
+
+        <div id="game-feedback" class="game-feedback"></div>
+    </div>
+    
+    <script src="script-game.js"></script>
+</body>
+</html>

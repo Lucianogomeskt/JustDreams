@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Alunos - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/cadastrar_alunos.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👥 Cadastrar Alunos</h1>
+            <p>Adicione novos alunos ao sistema</p>
+        </div>
+        
+        <div class="content">
+            <button class="btn-voltar" onclick="window.location.href='professor_dashboard.html'">← Voltar ao Dashboard</button>
+            
+            <div class="info-box">
+                <strong>ℹ️ Informação:</strong> Os alunos cadastrados aqui poderão fazer login no sistema e acessar o jogo de matemática. Certifique-se de que os dados estão corretos.
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            <div id="success" class="success" style="display: none;"></div>
+            
+            <form id="cadastrar-aluno-form">
+                <div class="form-group">
+                    <label for="nome">Nome Completo do Aluno *</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Ex: João Silva Santos">
+                    <div class="help-text">Digite o nome completo do aluno</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="idade">Idade *</label>
+                        <input type="number" id="idade" name="idade" required min="5" max="100" placeholder="Ex: 8">
+                        <div class="help-text">Idade entre 5 e 100 anos</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turma">Turma *</label>
+                        <input type="text" id="turma" name="turma" required placeholder="Ex: 1°A, 2°B, 3°C" pattern="[0-9]+°[A-Za-z]" title="Formato: número + ° + letra (ex: 1°A)">
+                        <div class="help-text">Digite a turma no formato: número + ° + letra (ex: 1°A, 2°B, 3°C)</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha *</label>
+                    <input type="password" id="senha" name="senha" required placeholder="Mínimo 6 caracteres">
+                    <div class="help-text">A senha deve ter pelo menos 6 caracteres</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmar_senha">Confirmar Senha *</label>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" required placeholder="Digite a senha novamente">
+                    <div class="help-text">Digite a mesma senha para confirmar</div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn-submit">
+                    Cadastrar Aluno
+                </button>
+            </form>
+
+            <!-- Seção de Alunos da Turma -->
+            <div class="section-divider"></div>
+            <div class="section-header">
+                <h2>👥 Alunos da Sua Turma</h2>
+                <p>Alunos cadastrados em suas turmas</p>
+            </div>
+            
+            <div id="alunos-turma" class="alunos-container">
+                <div class="loading">Carregando alunos...</div>
+            </div>
+
+            <!-- Seção de Alunos Sem Turma -->
+            <div class="section-divider"></div>
+            <div class="section-header">
+                <h2>🔍 Alunos Sem Turma</h2>
+                <p>Alunos cadastrados no sistema que não estão em nenhuma turma</p>
+            </div>
+            
+            <div id="alunos-sem-turma" class="alunos-container">
+                <div class="loading">Carregando alunos sem turma...</div>
+            </div>
+        </div>
+    </div>
+<script src="../js/cadastrar_alunos.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Amigos - Just Dreams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/meus_amigos.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="btn-back" onclick="window.location.href='aluno_dashboard.html'">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <h1><i class="fas fa-users"></i> Meus Amigos</h1>
+            <p>Gerencie suas amizades e solicitações pendentes</p>
+        </div>
+        
+        <div class="content">
+            <!-- Seção de Adicionar Amigos -->
+            <div class="search-section" style="margin-bottom: 30px; background: #f8f9fa; padding: 20px; border-radius: 15px;">
+                <h3 style="margin-bottom: 20px; color: #0913a3;"><i class="fas fa-user-plus"></i> Adicionar Novo Amigo</h3>
+                
+                <div class="search-options" style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <!-- Busca por ID -->
+                    <div class="search-by-id" style="flex: 1; min-width: 250px;">
+                        <h4 style="margin-bottom: 10px; color: #ffa43d;">Adicionar por ID</h4>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" id="friendId" placeholder="Digite o ID do amigo" 
+                                style="flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #ffa43d;">
+                            <button onclick="adicionarAmigoPorId()" class="btn-action btn-message">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading" style="text-align: center; padding: 20px;">
+                <i class="fas fa-spinner fa-spin"></i> Carregando...
+            </div>
+
+            <div id="friends-list" class="friends-section" style="display: none;">
+                <!-- Lista de amigos será carregada aqui -->
+            </div>
+
+            <div id="pending-requests" class="pending-requests" style="display: none;">
+                <h3><i class="fas fa-user-clock"></i> Solicitações Pendentes</h3>
+                <div id="requests-list">
+                    <!-- Solicitações pendentes serão carregadas aqui -->
+                </div>
+                <div id="no-pending-requests" class="no-pending-requests" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Nenhuma solicitação pendente</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../js/meus_amigos.js"></script>
+<script src="../js/list_alunos.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Turmas - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/gerenciar_turma.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Gerenciar Turmas</h1>
+            <p>Visualize e gerencie todas as suas turmas</p>
+        </div>
+        
+        <div class="content">
+            <button class="btn-voltar" onclick="window.location.href='professor_dashboard.html'">← Voltar ao Dashboard</button>
+            
+            <button class="btn-criar" onclick="window.location.href='criar_turma.html'">
+                ➕ Criar Nova Turma
+            </button>
+            
+            <div id="loading" class="loading">
+                Carregando turmas...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="turmas-container" style="display: none;">
+                <div class="turmas-grid" id="turmas-grid">
+                    <!-- Turmas serão carregadas aqui -->
+                </div>
+            </div>
+            
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <h3>Nenhuma turma encontrada</h3>
+                <p>Você ainda não criou nenhuma turma. Clique no botão acima para criar sua primeira turma!</p>
+            </div>
+        </div>
+    </div>
+<script src="../js/gerenciar_turma.js"></script>
+</body>
+</html>

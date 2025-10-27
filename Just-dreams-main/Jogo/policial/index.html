@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detetive Mirim - Jogo Educativo Policial</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="robot-icon">
+                <img id="player-avatar" alt="Avatar do Jogador" style="width:60px;height:60px;border-radius:8px;object-fit:contain;" />
+            </div>
+            <h1>Detetive Mirim</h1>
+            <div class="subtitle">Encontre os objetos que não pertencem ao trabalho policial!</div>
+        </header>
+        
+        <div class="game-area">
+            <div class="instructions">
+                <p>Olá, detetive! Sua missão é encontrar os objetos que <strong>não pertencem</strong> ao trabalho policial. Clique em cada objeto suspeito que você encontrar!</p>
+            </div>
+            
+            <div class="scene-container">
+                <div class="scene" id="scene">
+                    <!-- Objetos serão inseridos aqui via JavaScript -->
+                </div>
+            </div>
+            
+            <div class="feedback" id="feedback"></div>
+            <div class="score" id="score">Pontuação: 0</div>
+            
+            <div class="controls">
+                <button id="hint">Dica</button>
+                <button id="next">Próxima Missão</button>
+                <button id="back-button" class="back-button" onclick="window.location.href='../index.html'">← Voltar ao Menu</button>
+            </div>
+        </div>
+        
+        <div class="completed" id="completed">
+            <h2>Missão Cumprida!</h2>
+            <div class="trophy">🏆</div>
+            <p>Parabéns, detetive! Você completou todas as missões!</p>
+            <div class="controls">
+                <button id="restart">Jogar Novamente</button>
+                <button id="back-button-completed" class="back-button" onclick="window.location.href='../index.html'">← Voltar ao Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="../systems/healthTimer.js"></script>
+    <script src="../systems/rankingSystem.js"></script>
+</body>
+</html>

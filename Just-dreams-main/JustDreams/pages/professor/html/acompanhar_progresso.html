@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acompanhar Progresso - Just Dreams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="stylesheet" href="../css/acompanhar_progresso.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Acompanhar Progresso</h1>
+            <p>Visualize o desempenho e progresso dos seus alunos</p>
+        </div>
+        
+        <div class="content">
+            <button class="btn-voltar" onclick="window.location.href='professor_dashboard.html'">← Voltar ao Dashboard</button>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="turma-filter">Filtrar por Turma</label>
+                    <select id="turma-filter">
+                        <option value="">Todas as turmas</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="periodo-filter">Período</label>
+                    <select id="periodo-filter">
+                        <option value="7">Últimos 7 dias</option>
+                        <option value="30" selected>Últimos 30 dias</option>
+                        <option value="90">Últimos 90 dias</option>
+                        <option value="365">Último ano</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="search-aluno">Buscar Aluno</label>
+                    <input type="text" id="search-aluno" placeholder="Digite o nome do aluno...">
+                </div>
+                
+                <button class="btn-filtrar" onclick="aplicarFiltros()">Filtrar</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number" id="total-alunos">0</div>
+                    <div class="label">Total de Alunos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="alunos-ativos">0</div>
+                    <div class="label">Alunos Ativos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="progresso-medio">0%</div>
+                    <div class="label">Progresso Médio</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="jogos-realizados">0</div>
+                    <div class="label">Jogos Realizados</div>
+                </div>
+            </div>
+
+            <div id="loading" class="loading">
+                Carregando progresso dos alunos...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="progresso-section">
+                    <div class="progresso-header">
+                        <h3>📈 Progresso Individual dos Alunos</h3>
+                    </div>
+                    
+                    <div class="alunos-progresso" id="alunos-progresso">
+                        <!-- Alunos serão carregados aqui -->
+                    </div>
+                    
+                    <div id="empty-state" class="empty-state" style="display: none;">
+                        <h3>Nenhum aluno encontrado</h3>
+                        <p>Não há alunos cadastrados ou que atendam aos filtros selecionados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../js/acompanhar_progresso.js"></script>
+</body>
+</html>

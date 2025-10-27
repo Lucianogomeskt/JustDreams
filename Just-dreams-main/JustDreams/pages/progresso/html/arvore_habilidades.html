@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árvore de Habilidades - Just Dreams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="stylesheet" href="../css/arvore_habilidades.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+    <script src="https://kit.fontawesome.com/d7d156aef2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌳 Árvore de Habilidades</h1>
+            <p>Veja como você está crescendo na sua jornada de aprendizado!</p>
+            <div class="user-info" id="user-info">
+                Carregando...
+            </div>
+            <button id="teste-masterizar" onclick="simularMasterizacao()" style="
+                background: #4facfe;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 20px;
+                cursor: pointer;
+                margin-top: 10px;
+                font-size: 14px;
+            ">🧪 Teste: Masterizar Todas as Habilidades</button>
+        </div>
+        
+        <div class="content">
+            <button class="btn-voltar" onclick="window.location.href='progresso_aluno.html'">← Voltar ao Progresso</button>
+            
+            <div id="loading" class="loading">
+                🌱 Cultivando sua árvore de habilidades...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-habilidades">0</div>
+                        <div class="stat-label">Habilidades Desbloqueadas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="nivel-atual">1</div>
+                        <div class="stat-label">Nível Atual</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="pontos-experiencia">0</div>
+                        <div class="stat-label">Pontos de Experiência</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="proximo-nivel">100</div>
+                        <div class="stat-label">Próximo Nível</div>
+                    </div>
+                </div>
+
+                <div class="tree-container">
+                    <div class="tree-bg"></div>
+                    <div class="skill-tree" id="skill-tree">
+                        <!-- Árvore será gerada aqui -->
+                    </div>
+                </div>
+
+                <div class="progress-info">
+                    <div class="progress-title">Progresso para o Próximo Nível</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text">0 / 100 XP</div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../js/arvore_habilidades.js"></script>
+</body>
+</html>

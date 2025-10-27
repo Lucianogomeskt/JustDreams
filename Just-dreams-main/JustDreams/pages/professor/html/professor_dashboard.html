@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Professor - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="../css/professor_dashboard.css">
+   <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👨‍🏫 Painel do Professor</h1>
+            <p>Gerencie suas turmas e acompanhe o progresso dos alunos</p>
+            
+            <div class="user-info">
+                <div class="user-name" id="user-name">Carregando...</div>
+                <div class="user-email" id="user-email">Carregando...</div>
+                <button class="logout-btn" onclick="logout()">Sair</button>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div id="loading" class="loading">
+                Carregando informações...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="welcome-section">
+                    <h2>Bem-vindo, <span id="welcome-name">Professor</span>!</h2>
+                    <p>Gerencie suas turmas, acompanhe o progresso dos alunos e crie atividades educativas.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number" id="total-turmas">0</div>
+                        <div class="label">Turmas Ativas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="total-alunos">0</div>
+                        <div class="label">Alunos Cadastrados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="alunos-ativos">0</div>
+                        <div class="label">Alunos Ativos Hoje</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="progresso-medio">0%</div>
+                        <div class="label">Progresso Médio</div>
+                    </div>
+                </div>
+
+
+                <div class="quick-actions">
+                    <h3>⚡ Ações Rápidas</h3>
+                    <div class="actions-grid">
+                        <a href="criar_turma.html" class="action-btn">➕ Criar Nova Turma</a>
+                        <a href="cadastrar_alunos.html" class="action-btn">👤 Cadastrar Alunos</a>
+                        <a href="acompanhar_progresso.html" class="action-btn">📈 Acompanhar Progresso</a>
+                        <a href="gerenciar_turmas.html" class="action-btn">📚 Gerenciar Turmas</a>
+                        <!-- Jogos Educativos removido conforme solicitação -->
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>📋 Atividade Recente</h3>
+                    <div id="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-info">
+                                <div class="activity-title">Sistema iniciado</div>
+                                <div class="activity-time">Agora</div>
+                            </div>
+                            <div class="activity-status status-info">Online</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../js/professor_dashboard.js"></script>
+</body>
+</html>

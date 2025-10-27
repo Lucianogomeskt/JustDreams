@@ -1,0 +1,224 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            background-image: url('../../../../images/predioCruzeiro.png');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+       
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(238, 232, 232, 0.247);
+            backdrop-filter: blur(2px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3316c56c 0%, #3316c56c 100%);
+            padding: 30px;
+            text-align: center;
+            color: rgb(255, 255, 255);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .profissao-info {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .profissao-info h3 {
+            color: #1e2dfac2;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .profissao-info p {
+            color: #ffa135;
+            font-size: 1rem;
+        }
+
+        .personagens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .personagem-card {
+            background-color: #6041ff94;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s, border 0.1s;
+            border: 2px solid transparent;
+            text-align: center;
+            min-height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .personagem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(255, 163, 25, 0.548);
+        }
+
+        .personagem-card.selected {
+            border-color: #ff971f;
+            box-shadow: 0 0 20px #ff971f(73, 76, 255, 0.5);
+        }
+
+        .personagem-card.selected .personagem-avatar {
+            transform: scale(1.1);
+        }
+
+        .personagem-avatar {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin: 0 0 15px 0;
+            background: transparent;
+            display: block;
+        }
+
+        .personagem-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .personagem-card.selected .personagem-avatar {
+            border-color: white;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+        }
+
+        .personagem-nome {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .personagem-card.selected .personagem-nome {
+            color: white;
+        }
+
+        .personagem-descricao {
+            font-size: 0.9rem;
+            color: #cacaca;
+            line-height: 1.4;
+        }
+
+        /* Ocultar nome e descrição dos personagens conforme solicitado */
+        .personagem-nome,
+        .personagem-descricao {
+            display: none;
+        }
+
+        .personagem-card.selected .personagem-descricao {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .btn-continuar {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            background-color: #0b0b9477;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, opacity 0.3s;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .btn-continuar:hover:not(:disabled) {
+            background-color: #ff971fe0;
+        }
+
+        .btn-continuar:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .user-info {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .user-info h3 {
+            color: #3426ff;
+            margin-bottom: 5px;
+        }
+
+        .user-info p {
+            color: #ffa126;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .personagens-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .content {
+                padding: 20px;
+            }
+        }

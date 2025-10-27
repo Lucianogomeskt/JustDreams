@@ -1,0 +1,211 @@
+/* ========================================
+   COMPONENTES - FORMULÁRIOS
+   ======================================== */
+
+/* Container de formulário */
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Grupo de input */
+.input-group {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+/* Labels */
+.input-group label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.5;
+}
+
+/* Inputs base */
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-primary);
+  background-color: var(--color-accent);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-normal);
+  outline: none;
+  min-height: 44px; /* Acessibilidade */
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: var(--color-border);
+  box-shadow: 0 0 0 3px rgba(85, 85, 255, 0.1);
+  background-color: var(--color-secondary);
+}
+
+.input-group input:hover,
+.input-group select:hover,
+.input-group textarea:hover {
+  border-color: var(--color-highlight);
+  background-color: var(--color-secondary);
+}
+
+/* Placeholder */
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+/* Estados de validação */
+.input-group input:valid {
+  border-color: var(--color-success);
+}
+
+.input-group input:invalid:not(:placeholder-shown) {
+  border-color: var(--color-error);
+}
+
+/* Mensagens de erro */
+.input-group .error-message {
+  display: none;
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.input-group input:invalid:not(:placeholder-shown) + .error-message {
+  display: block;
+}
+
+/* Inputs específicos */
+.input-group input[type="email"] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23ff55c2' d='M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 2 2v8.646A2 2 0 0 1 14 14H2a2 2 0 0 1-2-2V3.555zM14 4.5v.5H2v-.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-sm) center;
+  background-size: 16px;
+  padding-right: var(--spacing-xl);
+}
+
+.input-group input[type="password"] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23ff55c2' d='M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-sm) center;
+  background-size: 16px;
+  padding-right: var(--spacing-xl);
+}
+
+.input-group input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input-group input[type="number"]::-webkit-outer-spin-button,
+.input-group input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Textarea */
+.input-group textarea {
+  min-height: 100px;
+  resize: vertical;
+  font-family: var(--font-primary);
+  line-height: 1.5;
+}
+
+/* Select */
+.input-group select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23ff55c2' d='M8 11L3 6h10l-5 5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-sm) center;
+  background-size: 16px;
+  padding-right: var(--spacing-xl);
+  cursor: pointer;
+}
+
+.input-group select option {
+  background-color: var(--color-accent);
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+}
+
+/* Checkbox e Radio */
+.input-group input[type="checkbox"],
+.input-group input[type="radio"] {
+  width: auto;
+  min-height: auto;
+  margin-right: var(--spacing-sm);
+  accent-color: var(--color-highlight);
+}
+
+.input-group .checkbox-group,
+.input-group .radio-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.input-group .checkbox-group label,
+.input-group .radio-group label {
+  margin-bottom: 0;
+  margin-left: var(--spacing-sm);
+  cursor: pointer;
+}
+
+/* Links de formulário */
+.link-button {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.link-button a {
+  color: var(--color-highlight);
+  text-decoration: underline;
+  font-weight: var(--font-weight-semibold);
+  transition: color var(--transition-fast);
+}
+
+.link-button a:hover {
+  color: #ff66cc;
+  text-decoration: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .form-container {
+    max-width: 100%;
+    padding: 0 var(--spacing-md);
+  }
+  
+  .input-group {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
+    padding: var(--spacing-sm) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+}

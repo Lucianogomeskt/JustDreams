@@ -1,0 +1,257 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #21193d; /* Roxo escuro */
+    color: #fff;
+}
+
+.game-container {
+    text-align: center;
+    padding: 40px;
+    background: #2b234d;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    border: 3px solid #00BFFF;
+}
+
+.header-section {
+    margin-bottom: 30px;
+}
+
+.robot-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    animation: floatUpDown 2s ease-in-out infinite alternate;
+}
+
+@keyframes floatUpDown {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-10px); }
+}
+
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.patient-card {
+    background-color: #3b3363;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.patient-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ff55c2; /* Rosa vibrante */
+    margin-bottom: 15px;
+}
+
+.patient-avatar {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.health-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.health-bar-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.health-bar {
+    width: 70%;
+    height: 25px;
+    background-color: #e03e3e; /* Vermelho - pouca vida */
+    border-radius: 12px;
+    overflow: hidden;
+    transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    border: 1px solid #c03030;
+}
+
+.math-question {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 25px;
+}
+
+.input-area {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+#answer-input {
+    width: 150px;
+    padding: 12px 15px;
+    border: 2px solid #5555ff;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: #3b3363;
+    color: #fff;
+    transition: border-color 0.3s;
+    text-align: center;
+}
+
+#answer-input:focus {
+    outline: none;
+    border-color: #ff55c2;
+    box-shadow: 0 0 10px rgba(255, 85, 194, 0.5);
+}
+
+.game-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.game-button.primary {
+    background-color: #5555ff; /* Azul vibrante */
+    color: #fff;
+}
+
+.game-button.primary:hover:not(:disabled) {
+    background-color: #ff55c2; /* Rosa vibrante */
+}
+
+.game-button.secondary {
+    background-color: #3b3363;
+    color: #fff;
+}
+
+.game-button.secondary:hover:not(:disabled) {
+    background-color: #5555ff;
+}
+
+.back-button {
+    background-color: #FF69B4;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.back-button:hover {
+    background-color: #FF1493;
+}
+
+.game-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.game-feedback {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    min-height: 30px; /* Para evitar saltos na tela */
+}
+
+.game-feedback.correct {
+    color: #5ab173; /* Verde para acerto */
+}
+
+.game-feedback.incorrect {
+    color: #e03e3e; /* Vermelho para erro */
+}
+
+.game-feedback.win {
+    color: #5ab173;
+    font-size: 2rem;
+}
+
+.game-feedback.lose {
+    color: #e03e3e;
+    font-size: 2rem;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .game-container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    .math-question {
+        font-size: 1.5rem;
+    }
+    .input-area {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    #answer-input {
+        width: 80%;
+    }
+    .game-button, .back-button {
+        width: 80%;
+    }
+    .game-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+    .math-question {
+        font-size: 1.3rem;
+    }
+    .patient-avatar {
+        font-size: 3rem;
+    }
+}

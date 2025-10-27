@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playtech Quiz: Pequeno Bombeiro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header-robot">
+            <div class="robot-icon">
+                <img id="player-avatar" alt="Avatar do Jogador" style="width:60px;height:60px;border-radius:8px;object-fit:contain;" />
+            </div>
+            <h1>Quiz do Pequeno Bombeiro!</h1>
+        </div>
+        <p class="description">Teste seus conhecimentos sobre o trabalho dos bombeiros!</p>
+
+        <div id="quiz-screen">
+            <h2 id="question-text">Qual é a principal ferramenta do bombeiro para apagar o fogo?</h2>
+            <div id="options-container">
+                <button class="option-button" data-option="A">A) Machado</button>
+                <button class="option-button" data-option="B">B) Mangueira</button>
+                <button class="option-button" data-option="C">C) Pá</button>
+                <button class="option-button" data-option="D">D) Tesoura</button>
+            </div>
+            <div id="feedback-message" class="hidden"></div>
+            <div class="controls">
+                <button id="next-button" class="hidden">Próxima Pergunta</button>
+                <button id="back-button" class="back-button" onclick="window.location.href='../index.html'">← Voltar ao Menu</button>
+            </div>
+        </div>
+
+        <div id="result-screen" class="hidden">
+            <h2>Fim do Quiz!</h2>
+            <p id="score-text"></p>
+            <p id="final-message"></p>
+            <div class="controls">
+                <button id="restart-button">Jogar Novamente</button>
+                <button id="back-button-result" class="back-button" onclick="window.location.href='../index.html'">← Voltar ao Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="../systems/healthTimer.js"></script>
+    <script src="../systems/rankingSystem.js"></script>
+</body>
+</html>

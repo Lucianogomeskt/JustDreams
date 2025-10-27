@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Progresso - Just Dreams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="stylesheet" href="../css/progresso_aluno.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+    <script src="https://kit.fontawesome.com/d7d156aef2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Meu Progresso</h1>
+            <p>Acompanhe seu desempenho no jogo de matemática</p>
+        </div>
+        
+        <div class="content">
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button class="btn-voltar" type="button" onclick="window.location.href='../../aluno/html/aluno_dashboard.html'">← Voltar ao Dashboard
+                <button class="btn-voltar" onclick="window.location.href='arvore_habilidades.html'" style="background: #28a745;">🌳 Ver Árvore de Habilidades</button>
+            </div>
+            
+            <div id="loading" class="loading">
+                Carregando seu progresso...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number" id="total-sessoes">0</div>
+                        <div class="label">Sessões Jogadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="total-acertos">0</div>
+                        <div class="label">Acertos Totais</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="taxa-acerto">0%</div>
+                        <div class="label">Taxa de Acerto</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="pontuacao-media">0</div>
+                        <div class="label">Pontuação Média</div>
+                    </div>
+                </div>
+                
+                <div class="medalhas">
+                    <h3>🏆 Medalhas Conquistadas</h3>
+                    <div class="medalha-list">
+                        <div class="medalha" id="medalha-bronze">
+                            🥉<span>Bronze</span>
+                        </div>
+                        <div class="medalha" id="medalha-prata">
+                            🥈<span>Prata</span>
+                        </div>
+                        <div class="medalha" id="medalha-ouro">
+                            🥇<span>Ouro</span>
+                        </div>
+                        <div class="medalha" id="medalha-diamante">
+                            💎<span>Diamante</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="historico">
+                    <h3>📈 Histórico de Jogos</h3>
+                    <div id="historico-lista">
+                        <!-- Histórico será carregado aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../js/progresso_aluno.js"></script>
+</body>
+</html>

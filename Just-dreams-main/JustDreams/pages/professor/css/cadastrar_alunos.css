@@ -1,0 +1,261 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Luckiest Guy", cursive;
+            background: linear-gradient(135deg, #0913a3 0%, #0913a3 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            font-family: "Luckiest Guy", cursive;
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg,#3232ff 0%, #0083fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .btn-voltar {
+            font-family: "Luckiest Guy", cursive;
+            background:#ffa43d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: #5a6268;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #3232ff;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3232ff;
+        }
+
+        .form-group .help-text {
+            font-size: 0.9rem;
+            color: #ffa43d;
+            margin-top: 5px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn-submit {
+            font-family: "Luckiest Guy", cursive;
+            background: linear-gradient(135deg,#3232ff 0%, #0083fe 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(11, 141, 255, 0.4);
+        }
+
+        .btn-submit:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info-box {
+            background: #ffee0069;
+            color: hsl(0, 0%, 43%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #b8b517;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            margin: 40px 0 20px 0;
+            border-radius: 1px;
+        }
+
+        .section-header {
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            color: #3232ff;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .section-header p {
+            color: #ffa43d;
+            font-size: 0.9rem;
+        }
+
+        .alunos-container {
+            margin-bottom: 30px;
+        }
+
+        .aluno-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .aluno-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .aluno-info {
+            flex: 1;
+        }
+
+        .aluno-nome {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .aluno-detalhes {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .aluno-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-adicionar {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .btn-adicionar:hover {
+            background: #45a049;
+        }
+
+        .btn-remover {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .btn-remover:hover {
+            background: #da190b;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }

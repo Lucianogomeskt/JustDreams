@@ -1,0 +1,208 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #d608c8, #07016d, #2d6ffd);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(90deg, #1a2a6c, #2a3a9c);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.robot-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    animation: floatUpDown 2s ease-in-out infinite alternate;
+}
+
+@keyframes floatUpDown {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-10px); }
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.game-area {
+    padding: 20px;
+    text-align: center;
+}
+
+.instructions {
+    background-color: #f0f8ff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 5px solid #2a3a9c;
+}
+
+.scene-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #e6f2ff;
+    border-radius: 10px;
+    margin: 20px 0;
+    overflow: hidden;
+    border: 3px solid #2a3a9c;
+}
+
+.scene {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.object {
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.object:hover {
+    transform: scale(1.1);
+}
+
+.object img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+button {
+    background: linear-gradient(90deg, #2a3a9c, #3a4aac);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+.back-button {
+    background: linear-gradient(90deg, #FF69B4, #FF1493);
+    color: white;
+}
+
+.back-button:hover {
+    background: linear-gradient(90deg, #FF1493, #DC143C);
+}
+
+.score {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #2a3a9c;
+    background-color: #e6f2ff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.feedback {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 30px;
+}
+
+.correct {
+    color: #2e8b57;
+}
+
+.incorrect {
+    color: #dc143c;
+}
+
+.completed {
+    text-align: center;
+    padding: 30px;
+    display: none;
+}
+
+.completed h2 {
+    color: #2a3a9c;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.trophy {
+    font-size: 80px;
+    margin: 20px 0;
+    color: gold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .scene-container {
+        height: 300px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .robot-icon {
+        font-size: 2.5rem;
+    }
+}

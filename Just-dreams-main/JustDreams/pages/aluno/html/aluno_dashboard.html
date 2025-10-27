@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Aluno - Just Dreams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/aluno_dashboard.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="btn-logout" onclick="logout()">🚪 Sair</button>
+            <div id="notification-badge" class="notification-badge" style="display: none;">
+                <i class="fas fa-bell"></i>
+            </div>
+            <h1>🎮 Painel do Aluno</h1>
+            <p>Bem-vindo à sua jornada de aprendizado!</p>
+            <div class="user-info" id="user-info">
+                Carregando...
+            </div>
+        </div>
+        
+        <div class="content">
+            <div id="loading" class="loading">
+                🌱 Carregando seu Painel...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="welcome-section">
+                    <h2 id="welcome-message">Olá, Estudante!</h2>
+                    <p id="welcome-description">Continue sua jornada de aprendizado e descubra novas habilidades!</p>
+                </div>
+
+                <div class="quick-stats" id="playtech-mini-stats">
+                    <div class="stat-card">
+                        <h3>Atividades Hoje</h3>
+                        <div class="number" id="today-count">0</div>
+                        <div class="label">Pausas saudáveis</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pontos Totais</h3>
+                        <div class="number" id="points-count">0</div>
+                        <div class="label">Ranking & medalhas</div>
+                    </div>
+                    <div class="stat-card" style="cursor: pointer;" onclick="window.showDashboardStats && window.showDashboardStats()">
+                        <h3>Estatísticas</h3>
+                        <div class="number">📊</div>
+                        <div class="label">Ver resumo</div>
+                    </div>
+                    <div class="stat-card" style="cursor: pointer;" onclick="window.openRanking && window.openRanking()">
+                        <h3>Ranking</h3>
+                        <div class="number">🏆</div>
+                        <div class="label">Medalhas</div>
+                    </div>
+                </div>
+
+                <div class="quick-stats" id="quick-stats">
+                    <!-- Estatísticas serão carregadas aqui -->
+                </div>
+
+                <div class="actions-grid">
+                    <div class="action-card" onclick="window.location.href='escolha_profissao.html'">
+                        <div class="icon">🎮</div>
+                        <h3>Jogar</h3>
+                        <p>Continue sua aventura no mundo dos sonhos e aprenda matemática de forma divertida!</p>
+                    </div>
+
+                    <!-- Jogos Educativos removido conforme solicitado -->
+
+                    <div class="action-card" onclick="window.location.href='../../progresso/html/progresso_aluno.html'">
+                        <div class="icon">📊</div>
+                        <h3>Meu Progresso</h3>
+                        <p>Veja suas estatísticas detalhadas, medalhas conquistadas e histórico de jogos.</p>
+                    </div>
+
+                    <div class="action-card" onclick="window.location.href='../../progresso/html/arvore_habilidades.html'">
+                        <div class="icon">🌳</div>
+                        <h3>Árvore de Habilidades</h3>
+                        <p>Visualize seu crescimento como uma árvore que cresce conforme você aprende!</p>
+                    </div>
+
+                    <div class="action-card" onclick="window.location.href='jornada_personagem.html'">
+                        <div class="icon">👤</div>
+                        <h3>Minha Jornada</h3>
+                        <p>Reviva sua jornada e veja como seu personagem evoluiu ao longo do tempo.</p>
+                    </div>
+
+                    <div class="action-card" onclick="window.location.href='meus_amigos.html'">
+                        <div class="icon">👥</div>
+                        <h3>Meus Amigos</h3>
+                        <p>Gerencie suas amizades, veja solicitações pendentes e faça novas conexões!</p>
+                    </div>
+                </div>
+
+                <div class="progress-preview" id="progress-preview">
+                    <h3>🚀 Suas Habilidades Recentes</h3>
+                    <div id="skills-list">
+                        <!-- Habilidades serão carregadas aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../../../../Jogo/systems/healthTimer.js"></script>
+<script src="../../../../Jogo/systems/rankingSystem.js"></script>
+<script>
+    (function(){
+        function updateMiniStats(){
+            try {
+                var todayEl = document.getElementById('today-count');
+                var pointsEl = document.getElementById('points-count');
+                if (window.healthTimer && typeof window.healthTimer.getStats === 'function') {
+                    var stats = window.healthTimer.getStats();
+                    if (todayEl) todayEl.textContent = stats.completedToday || 0;
+                }
+                if (window.rankingSystem && typeof window.rankingSystem.getTotalPoints === 'function') {
+                    var total = window.rankingSystem.getTotalPoints();
+                    if (pointsEl) pointsEl.textContent = total || 0;
+                }
+            } catch(e) { /* noop */ }
+        }
+
+        window.openRanking = function(){
+            if (window.rankingSystem && typeof window.rankingSystem.showRanking === 'function') {
+                window.rankingSystem.showRanking();
+            }
+        };
+
+        window.showDashboardStats = function(){
+            var completedToday = (window.healthTimer && window.healthTimer.getStats) ? window.healthTimer.getStats().completedToday : 0;
+            var totalPoints = (window.rankingSystem && window.rankingSystem.getTotalPoints) ? window.rankingSystem.getTotalPoints() : 0;
+            alert('Resumo de Hoje\n\n🗓️ Atividades saudáveis: ' + completedToday + '\n💎 Pontos totais: ' + totalPoints);
+        };
+
+        document.addEventListener('DOMContentLoaded', function(){
+            // Atualiza agora e periodicamente
+            updateMiniStats();
+            setInterval(updateMiniStats, 30000);
+        });
+
+        window.addEventListener('storage', function(){
+            updateMiniStats();
+        });
+    })();
+</script>
+<script src="../js/aluno_dashboard.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,359 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .character-info {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .character-avatar {
+            font-size: 3rem;
+            background: rgba(255,255,255,0.3);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .character-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .character-details p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .journey-progress {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            height: 100%;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .phase-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #4facfe;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .phase-card.completed {
+            border-left-color: #28a745;
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        }
+
+        .phase-card.current {
+            border-left-color: #ffc107;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+        }
+
+        .phase-card.locked {
+            border-left-color: #6c757d;
+            background: #f8f9fa;
+            opacity: 0.6;
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .phase-status {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-current {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-locked {
+            background: #e2e3e5;
+            color: #6c757d;
+        }
+
+        .phase-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .phase-objectives {
+            margin-bottom: 20px;
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .objective-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .objective-completed {
+            color: #28a745;
+        }
+
+        .objective-pending {
+            color: #6c757d;
+        }
+
+        .phase-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-phase {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-continue {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-disabled {
+            background: #6c757d;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .achievements {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .achievements h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .achievement-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .achievement-item.earned {
+            border-color: #ffc107;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .achievement-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .achievement-desc {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .btn-back {
+            background: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #5a6268;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .character-info {
+                position: static;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            
+            .phases-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .phase-actions {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }

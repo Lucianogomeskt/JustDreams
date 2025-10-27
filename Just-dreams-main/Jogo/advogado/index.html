@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pequeno Advogado: Caça-Palavras da Justiça</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header-robot">
+            <div class="robot-icon">
+                <img id="player-avatar" alt="Avatar do Jogador" style="width:60px;height:60px;border-radius:8px;object-fit:contain;" />
+            </div>
+            <h1>Caça-Palavras da Justiça</h1>
+        </div>
+        <p class="description">Encontre as palavras do mundo do advogado no tabuleiro!</p>
+
+        <div class="game-area">
+            <div id="word-list">
+                <h2>Palavras para Encontrar:</h2>
+                <ul id="words-to-find">
+                    </ul>
+            </div>
+            <div id="word-search-grid">
+                </div>
+        </div>
+
+        <div class="controls">
+            <button id="reset-button">Novo Jogo</button>
+            <button id="back-button" class="back-button" onclick="window.location.href='../index.html'">← Voltar ao Menu</button>
+        </div>
+        <div id="message" class="hidden"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="../systems/healthTimer.js"></script>
+    <script src="../systems/rankingSystem.js"></script>
+</body>
+</html>

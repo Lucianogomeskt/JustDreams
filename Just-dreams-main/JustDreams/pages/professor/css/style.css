@@ -1,0 +1,208 @@
+* {
+            font-family: "Luckiest Guy", cursive;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #21193d; /* Roxo escuro */
+    background-image: url('../../../../images/espaço_3D.png');
+  overflow-y: auto;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    height: 90vh;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(14, 23, 153, 0.3);
+    backdrop-filter: blur(1.5px);
+    overflow: hidden;
+}
+
+.left-panel {
+   background-color: rgba(30, 30, 31, 0.425); /* fundo com transparência */
+    backdrop-filter: blur(9px);
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-title {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.left-panel h1 {
+    color:white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.left-panel p {
+    color:#ffa43d;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.right-panel {
+    width: 60%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(43, 35, 77, 0.4);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+}
+
+.input-with-icon {
+  width: 105%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-with-icon input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid #3232ff;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: "Luckiest Guy", cursive;
+  background-color: transparent;
+  color: #fff;
+}
+
+.input-with-icon i {
+  font-size: 1rem;
+  color:#ffa43d;
+}
+
+
+.right-panel h2 {
+    font-family: "Luckiest Guy", cursive;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3232ff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-family: "Luckiest Guy", cursive;
+    display: block;
+    margin-bottom: 5px;
+    color:#ffa43d;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #3232ff;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: "Luckiest Guy", cursive;
+    background-color:transparent;
+    color: #fff;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #ffa43d;
+    box-shadow: 0 0 10px #ffa43d(255, 85, 194, 0.5);
+}
+
+.submit-button {
+     width: 60%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #3838ff;
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "Luckiest Guy", cursive;
+    margin-left: 20%;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background-color:#ffa43d;
+}
+
+.link-button {
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.link-button a {
+    color:#3232ff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.link-button a:hover {
+    color:#ffa43d;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+    .left-panel, .right-panel {
+        width: 100%;
+        padding: 30px;
+    }
+    .left-panel {
+        border-radius: 20px 20px 0 0;
+    }
+    .right-panel {
+        padding: 30px 20px;
+    }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada do Personagem - Just Dreams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="stylesheet" href="../css/jornada_personagem.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌟 Jornada do Personagem</h1>
+            <p>Sua aventura de aprendizado com matemática</p>
+            
+            <div class="character-info">
+                <div class="character-avatar" id="character-avatar">👦</div>
+                <div class="character-details">
+                    <h3 id="character-name">João</h3>
+                    <p id="character-profession">Médico</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <button class="btn-back" onclick="window.location.href='http://localhost:3000/Just-dreams-main/Jogo/game.html'">← Voltar ao Jogo</button>
+            
+            <div id="loading" class="loading">
+                Carregando sua jornada...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="journey-progress">
+                    <h3>📊 Progresso da Jornada</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                        <div class="progress-text" id="progress-text">0%</div>
+                    </div>
+                    <p id="progress-description">Complete as fases para progredir em sua jornada!</p>
+                </div>
+
+                <div class="phases-grid" id="phases-grid">
+                    <!-- Fases serão carregadas aqui -->
+                </div>
+
+                <div class="achievements">
+                    <h3>🏆 Conquistas</h3>
+                    <div class="achievements-grid" id="achievements-grid">
+                        <!-- Conquistas serão carregadas aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../js/jornada_personagem.js"></script>
+</body>
+</html>

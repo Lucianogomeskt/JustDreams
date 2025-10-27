@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seu Personagem - Just Dreams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="stylesheet" href="../css/escolha_personagem.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👤 Escolha seu Personagem</h1>
+            <p>Selecione o personagem que irá representar você na aventura</p>
+        </div>
+        
+        <div class="content">
+            <div id="loading" class="loading">
+                Carregando...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="user-info">
+                    <h3 id="user-name">Carregando...</h3>
+                    <p>Escolha seu personagem para começar a aventura!</p>
+                </div>
+
+                <div class="profissao-info">
+                    <h3 id="profissao-nome">Carregando...</h3>
+                    <p id="profissao-descricao">Carregando...</p>
+                </div>
+
+                <div class="personagens-grid">
+                    <div class="personagem-card" data-personagem="joao">
+                        <div class="personagem-avatar"><img id="avatar-joao" src="" alt="João"></div>
+                        <div class="personagem-nome">João</div>
+                        <div class="personagem-descricao">
+                            Um jovem curioso e inteligente, sempre pronto para aprender coisas novas.
+                        </div>
+                    </div>
+
+                    <div class="personagem-card" data-personagem="maria">
+                        <div class="personagem-avatar"><img id="avatar-maria" src="" alt="Maria"></div>
+                        <div class="personagem-nome">Maria</div>
+                        <div class="personagem-descricao">
+                            Uma garota criativa e determinada, que adora resolver desafios.
+                        </div>
+                    </div>
+
+                    <div class="personagem-card" data-personagem="pedro">
+                        <div class="personagem-avatar"><img id="avatar-pedro" src="" alt="Pedro"></div>
+                        <div class="personagem-nome">Pedro</div>
+                        <div class="personagem-descricao">
+                            Um adolescente aventureiro, sempre em busca de novas experiências.
+                        </div>
+                    </div>
+
+                    <div class="personagem-card" data-personagem="ana">
+                        <div class="personagem-avatar"><img id="avatar-ana" src="" alt="Ana"></div>
+                        <div class="personagem-nome">Ana</div>
+                        <div class="personagem-descricao">
+                            Uma jovem estudiosa e focada, que gosta de superar desafios.
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+                <button class="btn-continuar" id="btn-continuar" disabled>
+                    🎮 Iniciar Jogo
+                </button>
+            </div>
+        </div>
+    </div>
+<script src="../js/escolha_personagem.js"></script>
+</body>
+</html>

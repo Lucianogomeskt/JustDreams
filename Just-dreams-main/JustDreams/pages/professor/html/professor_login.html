@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Dreams - Login do Professor</title>
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+    <script src="https://kit.fontawesome.com/d7d156aef2.js" crossorigin="anonymous"></script>
+</head>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="logo-container">
+                <img src="../../../../images/MascoteInteragindo-unscreen.gif" alt="Just Dreams Logo" class="logo">
+            </div>
+            <h1>Bem-vindo de volta, Professor!</h1>
+            <p>Faça login para acompanhar o progresso dos seus alunos.</p>
+        </div>
+        <div class="right-panel">
+            <h2>Login do Professor</h2>
+            <form id="professor-login-form">
+                <div class="input-group">
+                    <label for="professor-email">E-mail</label>
+                    <div class="input-with-icon">
+                    <input type="email" id="professor-email" name="email" required>
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                </div>
+                <div class="input-group">
+                    <label for="professor-password">Senha</label>
+                    <div class="input-with-icon">
+                    <input type="password" id="professor-password" name="password" required>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                </div>
+                <button type="submit" class="submit-button">Entrar</button>
+            </form>
+            <div class="link-button">
+                Não tem uma conta? <a href="professor_cadastro.html">Cadastre-se aqui.</a>
+            </div>
+            <div class="link-button">
+                Você é aluno? <a href="../../aluno/html/aluno_login.html">Clique aqui
+            </div>
+        </div>
+    </div>
+    <script src="../js/script_professor_login.js"></script>
+</body>
+</html>

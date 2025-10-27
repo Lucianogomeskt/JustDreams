@@ -1,0 +1,228 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Luckiest Guy", cursive;
+            background: linear-gradient(135deg, #0913a3 0%, #0913a3 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            font-family: "Luckiest Guy", cursive;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg,#3232ff 0%, #0083fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .btn-voltar {
+            font-family: "Luckiest Guy", cursive;
+            background: #ffa43d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: #5a6268;
+        }
+
+        .turma-info {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3232ff;
+        }
+
+        .turma-info h2 {
+            color: #ffa43d;
+            margin-bottom: 15px;
+        }
+
+        .turma-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color:#3232ff;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color:#ffa43d;
+            font-size: 1.1rem;
+        }
+
+        .alunos-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .alunos-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .alunos-header h3 {
+            color: #333;
+        }
+
+        .btn-adicionar {
+            background: linear-gradient(135deg,#3232ff 0%, #0083fe 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-adicionar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .alunos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .aluno-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3232ff;
+            transition: transform 0.3s;
+        }
+
+        .aluno-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .aluno-nome {
+            font-weight: 600;
+            color:#3232ff;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .aluno-info {
+            color: #ffa43d;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .aluno-progresso {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .progresso-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progresso-fill {
+            background: linear-gradient(135deg,#ff961e 0%, #00fe4c 100%);
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .progresso-text {
+            font-size: 0.8rem;
+            color: #3232ff;
+            text-align: center;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 15px;
+            color: #3232ff;
+        }
+
+        @media (max-width: 768px) {
+            .turma-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .alunos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .alunos-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+        }

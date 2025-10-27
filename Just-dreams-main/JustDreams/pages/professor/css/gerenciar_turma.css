@@ -1,0 +1,182 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Luckiest Guy", cursive;
+            background: linear-gradient(135deg, #0913a3 0%, #0913a3 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            font-family: "Luckiest Guy", cursive;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg,#3232ff 0%, #0083fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .btn-voltar {
+            font-family: "Luckiest Guy", cursive;
+            background:#ffa43d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: #5a6268;
+        }
+
+        .btn-criar {
+            font-family: "Luckiest Guy", cursive;
+            background: linear-gradient(135deg,#3232ff 0%, #0083fe 100%);
+            color: white;
+           padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-criar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 137, 243, 0.4);
+        }
+
+        .turmas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .turma-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #3232ff;
+            transition: transform 0.3s;
+        }
+
+        .turma-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .turma-card h3 {
+            color: #3232ff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .turma-info {
+            margin-bottom: 20px;
+        }
+
+        .turma-info p {
+            color: #ffa43d;
+            margin-bottom: 8px;
+        }
+
+        .turma-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .btn-primary {
+            background: #3232ff;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .turmas-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .turma-actions {
+                flex-direction: column;
+            }
+        }

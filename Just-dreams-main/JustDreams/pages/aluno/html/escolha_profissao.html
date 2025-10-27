@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha sua Profissão - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../images/JTFavicon.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="stylesheet" href="../css/escolha_profissao.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Escolha sua Profissão</h1>
+            <p>Selecione a profissão que você gostaria de exercer no jogo</p>
+        </div>
+        
+        <div class="content">
+            <div id="loading" class="loading">
+                Usuário Teste
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="user-info">
+                    <h3 id="user-name">Usuário Teste</h3>
+                    <p>Bem-vindo ao Just Dreams! Escolha sua profissão para começar a aventura.</p>
+                </div>
+                <div class="welcome-section">
+                    <h2>🚀 Que profissão você quer ser?</h2>
+                    <p>Escolha uma das profissões abaixo e comece sua jornada de aprendizado com português e matemática</p>
+                </div>
+
+                <div class="profissoes-grid">
+                    <div class="profissao-card" data-profissao="medico">
+                        <div class="profissao-emoji">👨‍⚕️</div>
+                        <div class="profissao-nome">Médico</div>
+                        <div class="profissao-descricao">
+Ajude a cuidar dos pacientes resolvendo desafios numéricos e calculando doses com precisão. Com lógica e atenção, você será o médico genial que salva vidas com números!                        </div>
+                    </div>
+
+
+                    <div class="profissao-card" data-profissao="advogado">
+                        <div class="profissao-emoji">⚖️</div>
+                        <div class="profissao-nome">Advogado</div>
+                        <div class="profissao-descricao">
+Entre no mundo dos advogados e descubra como a lógica, a investigação e a coragem ajudam a resolver mistérios e proteger o que é certo. Encontre pistas em caça-palavras, aprenda sobre leis e torne-se o herói dos tribunais!                        </div>
+                    </div>
+
+                    <div class="profissao-card" data-profissao="bombeiro">
+                        <div class="profissao-emoji">🚒</div>
+                        <div class="profissao-nome">Bombeiro</div>
+                        <div class="profissao-descricao">
+Ajude a apagar incêndios, salvar vidas e proteger sua cidade enquanto aprende sobre segurança e resgate. Você é o herói que todos esperam!                        </div>
+                    </div>
+
+                    <div class="profissao-card" data-profissao="policial">
+                        <div class="profissao-emoji">👮</div>
+                        <div class="profissao-nome">Policial</div>
+                        <div class="profissao-descricao">
+Ajude a manter a paz na cidade resolvendo enigmas e descobrindo pistas. Com raciocínio e coragem, você será o detetive mirim que todos admiram!                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 30px;">
+                    <button class="btn-continuar" onclick="window.location.href='aluno_dashboard.html'">
+                        ← Voltar ao Dashboard
+                    </button>
+                    <button class="btn-continuar" id="btn-continuar" disabled onclick="continuar()">
+                        Continuar para Escolha do Personagem
+                    </button>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+<script src="../js/escolha_profissao.js"></script>
+</body>
+</html>

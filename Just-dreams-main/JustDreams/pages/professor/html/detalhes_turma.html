@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Turma - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/detalhes_turma.css">
+   <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Detalhes da Turma</h1>
+            <p>Visualize informações e alunos da turma</p>
+        </div>
+        
+        <div class="content">
+            <button class="btn-voltar" onclick="window.location.href='gerenciar_turmas.html'">← Voltar às Turmas</button>
+            
+            <div id="loading" class="loading">
+                Carregando informações da turma...
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="content" style="display: none;">
+                <div class="turma-info">
+                    <h2 id="turma-nome">Carregando...</h2>
+                    <div class="turma-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Descrição</div>
+                            <div class="detail-value" id="turma-descricao">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Total de Alunos</div>
+                            <div class="detail-value" id="turma-total-alunos">0</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Data de Criação</div>
+                            <div class="detail-value" id="turma-data-criacao">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Progresso Médio</div>
+                            <div class="detail-value" id="turma-progresso-medio">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alunos-section">
+                    <div class="alunos-header">
+                        <h3>👥 Alunos da Turma</h3>
+                        <button class="btn-adicionar" onclick="adicionarAluno()">
+                            ➕ Adicionar Aluno
+                        </button>
+                    </div>
+                    
+                    <div id="alunos-container">
+                        <div class="alunos-grid" id="alunos-grid">
+                            <!-- Alunos serão carregados aqui -->
+                        </div>
+                        
+                        <div id="empty-alunos" class="empty-state" style="display: none;">
+                            <h3>Nenhum aluno encontrado</h3>
+                            <p>Esta turma ainda não possui alunos cadastrados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../js/detalhes_turma.js"></script>
+</body>
+</html>

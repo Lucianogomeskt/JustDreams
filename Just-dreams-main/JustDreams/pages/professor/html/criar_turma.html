@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Turma - Just Dreams</title>
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/criar_truma.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>➕ Criar Nova Turma</h1>
+            <p>Digite a turma no formato 1°A, 2°B, 3°C - o código será gerado automaticamente!</p>
+        </div>
+        
+        <div class="content">
+            <button class="btn-voltar" onclick="window.location.href='gerenciar_turmas.html'">← Voltar</button>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            <div id="success" class="success" style="display: none;"></div>
+            
+            <form id="criar-turma-form">
+                <div class="form-group">
+                    <label for="nome">Nome da Turma *</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Ex: 1°A, 2°B, 3°C" pattern="[0-9]+°[A-Za-z]" title="Formato: número + ° + letra (ex: 1°A)">
+                    <div class="help-text">Digite a turma no formato: número + ° + letra (ex: 1°A, 2°B, 3°C)</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Código da Turma (Gerado Automaticamente)</label>
+                    <div id="codigo-gerado" class="codigo-display">
+                        Digite a turma para ver o código
+                    </div>
+                    <div class="help-text">Este código será usado pelos alunos para se inscrever na turma</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" name="descricao" placeholder="Descreva os objetivos e características desta turma..."></textarea>
+                    <div class="help-text">Opcional: Adicione uma descrição detalhada da turma</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nivel">Nível de Ensino</label>
+                        <select id="nivel" name="nivel">
+                            <option value="">Selecione o nível</option>
+                            <option value="educacao-infantil">Educação Infantil</option>
+                            <option value="1-ano">1º Ano</option>
+                            <option value="2-ano">2º Ano</option>
+                            <option value="3-ano">3º Ano</option>
+                            <option value="4-ano">4º Ano</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="capacidade">Capacidade Máxima</label>
+                        <input type="number" id="capacidade" name="capacidade" min="1" max="50" value="30" placeholder="30">
+                        <div class="help-text">Número máximo de alunos</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="turno">Turno</label>
+                    <select id="turno" name="turno">
+                        <option value="">Selecione o turno</option>
+                        <option value="manha">Manhã</option>
+                        <option value="tarde">Tarde</option>
+                        <option value="noite">Noite</option>
+                        <option value="integral">Integral</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn-submit">
+                    Criar Turma
+                </button>
+            </form>
+        </div>
+    </div>
+<script src="../js/criar_turma.js"></script>
+</body>
+</html>

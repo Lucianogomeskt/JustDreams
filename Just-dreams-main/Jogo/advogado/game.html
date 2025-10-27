@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Dreams - Caça-Palavras da Justiça</title>
+    <link rel="icon" type="image/png" href="../../images/JTFavicon.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style-game.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1 id="game-title">Caça-Palavras da Justiça!</h1>
+            <p id="game-subtitle">Encontre as palavras do mundo jurídico no tabuleiro!</p>
+            <div class="character-info">
+                <div class="character-avatar" id="character-avatar">⚖️</div>
+                <div class="character-details">
+                    <div class="character-name" id="character-name">Advogado</div>
+                    <div class="character-profession" id="character-profession">Defensor da Justiça</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="patient-card">
+            <div class="patient-name">Caso "Defesa Legal"</div>
+            <div class="health-bar-container">
+                <div class="health-bar-label">Progresso:</div>
+                <div id="health-bar" class="health-bar"></div>
+            </div>
+            <div class="patient-avatar">⚖️</div>
+        </div>
+
+        <div class="question-area">
+            <div id="word-list">
+                <h3>Palavras para Encontrar:</h3>
+                <ul id="words-to-find"></ul>
+            </div>
+            <div id="word-search-grid"></div>
+        </div>
+
+        <div class="game-controls">
+            <button id="start-button" class="game-button primary">Iniciar Jogo</button>
+            <button id="reset-button" class="game-button secondary" disabled>Reiniciar Jogo</button>
+            <button id="advance-button" class="game-button success" style="display: none;">Avançar para Próxima Fase</button>
+        </div>
+
+        <div id="game-feedback" class="game-feedback"></div>
+    </div>
+    
+    <script src="script-game.js"></script>
+</body>
+</html>

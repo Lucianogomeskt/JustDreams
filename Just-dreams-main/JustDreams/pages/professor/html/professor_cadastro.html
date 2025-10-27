@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Dreams - Cadastro do Professor</title>
+    <link rel="icon" type="image/png" href="../../../../images/JTFavicon.png">
+    <link rel="stylesheet" href="../css/professor_cadastro.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');</style>
+    <script src="https://kit.fontawesome.com/d7d156aef2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="logo-container">
+                <img src="../../../../images/MascoteInteragindo-unscreen.gif" alt="Just Dreams Logo" class="logo">
+            </div>
+            <h1>Junte-se a nós, Professor!</h1>
+            <p>Cadastre-se para ajudar seus alunos a aprender de forma divertida.</p>
+        </div>
+        <div class="right-panel">
+            <h2>Cadastro do Professor</h2>
+            <form id="professor-cadastro-form">
+                <div class="input-group">
+                    <label for="teacher-name">Nome completo</label>
+                    <input type="text" id="teacher-name" name="name" required>
+                </div>
+                <div class="input-group">
+                    <label for="teacher-email">E-mail</label>
+                    <input type="email" id="teacher-email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="teacher-password">Senha</label>
+                    <input type="password" id="teacher-password" name="password" required>
+                </div>
+                <button type="submit" class="submit-button">Cadastrar Professor</button>
+            </form>
+            <div class="link-button">
+                Já tem uma conta? <a href="professor_login.html">Faça login.</a>
+            </div>
+        </div>
+    </div>
+    <script src="../js/script_professor_cadastro.js"></script>
+</body>
+</html>
