@@ -2,8 +2,11 @@
 const { Sequelize } = require('sequelize');
 const dotenv = require('dotenv');
 
-// Carregar variáveis de ambiente
-dotenv.config();
+// Carregar variáveis de ambiente SOMENTE SE NÃO ESTIVER EM PRODUÇÃO (como no Railway)
+// Isso impede que um arquivo .env local vazio ou incorreto sobrescreva as variáveis do Railway.
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 // --- CORREÇÃO FINAL PARA AMBIENTE CLOUD/RAILWAY ---
 // Priorizamos variáveis sem espaços que são padrões em cloud (MYSQL_HOST, etc.)
