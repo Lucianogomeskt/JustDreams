@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 
 // Carregar variáveis de ambiente SOMENTE SE NÃO ESTIVER EM PRODUÇÃO (como no Railway)
 // Isso impede que um arquivo .env local vazio ou incorreto sobrescreva as variáveis do Railway.
+// NOTE: O Railway define process.env.NODE_ENV por conta própria, mas a leitura do .env deve ser condicional.
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
