@@ -2,29 +2,28 @@
 const { Sequelize } = require('sequelize');
 const dotenv = require('dotenv');
 
-// Carregar variáveis de ambiente (só funcionarão se o arquivo .env estiver no deploy, 
-// mas é bom para garantir o desenvolvimento local)
+// Carregar variáveis de ambiente
 dotenv.config();
 
-// --- CORREÇÃO OBRIGATÓRIA PARA O RAILWAY ---
-// A lógica agora tenta primeiro ler as variáveis que o Railway injeta do serviço MySQL
-// (usando os nomes com espaços, caso não tenhamos criado as referências simples como DB_HOST).
+// --- CORREÇÃO FINAL PARA AMBIENTE CLOUD/RAILWAY ---
+// Priorizamos variáveis sem espaços que são padrões em cloud (MYSQL_HOST, etc.)
+// e mantemos o fallback para desenvolvimento local (DB_HOST, 'localhost').
 
 const sequelize = new Sequelize(
- // 1. DATABASE NAME: Prioriza DB_NAME ou usa a variável nativa do Railway (BANCO DE DADOS MYSQL)
- process.env.DB_NAME || process.env['BANCO DE DADOS MYSQL'] || 'justdreams',
+ // 1. DATABASE NAME: Prioriza DB_NAME ou usa o padrão da nuvem (MYSQL_DATABASE)
+ process.env.DB_NAME || process.env.MYSQL_DATABASE || 'justdreams',
  
- // 2. USER: Prioriza DB_USER ou usa a variável nativa do Railway (USUÁRIO MYSQL)
- process.env.DB_USER || process.env['USUÁRIO MYSQL'] || 'root',
+ // 2. USER: Prioriza DB_USER ou usa o padrão da nuvem (MYSQL_USER)
+ process.env.DB_USER || process.env.MYSQL_USER || 'root',
  
- // 3. PASSWORD: Prioriza DB_PASSWORD ou usa a variável nativa do Railway (SENHA DO MYSQL)
- process.env.DB_PASSWORD || process.env['SENHA DO MYSQL'] || '',
+ // 3. PASSWORD: Prioriza DB_PASSWORD ou usa o padrão da nuvem (MYSQL_PASSWORD)
+ process.env.DB_PASSWORD || process.env.MYSQL_PASSWORD || '',
  {
- // 4. HOST: Prioriza DB_HOST ou usa a variável nativa do Railway (HOST MYSQL)
- host: process.env.DB_HOST || process.env['HOST MYSQL'] || 'localhost',
+ // 4. HOST: Prioriza DB_HOST ou usa o padrão da nuvem (MYSQL_HOST)
+ host: process.env.DB_HOST || process.env.MYSQL_HOST || 'localhost',
     
-    // 5. PORTA: Prioriza a porta do Railway (MYSQLPORT)
-    port: process.env.DB_PORT || process.env.MYSQLPORT || 3306,
+    // 5. PORTA: Prioriza a porta do Railway (MYSQL_PORT)
+    port: process.env.DB_PORT || process.env.MYSQL_PORT || 3306,
 
  dialect: 'mysql',
  // Logging: Use o log do Sequelize apenas em desenvolvimento local para evitar poluição no Railway
@@ -43,14 +42,17 @@ const testConnection = async () => {
  try {
     // Log para depuração que aparecerá nos logs do Railway:
     console.log('🔄 Tentando conectar ao DB com as credenciais:');
+    // Para depuração, usamos os valores finais que serão usados na conexão
     console.log(`Host: ${sequelize.options.host}:${sequelize.options.port}`);
     console.log(`User: ${sequelize.options.username}`);
     
  await sequelize.authenticate();
  console.log('✅ Conexão com o banco de dados estabelecida com sucesso.');
  } catch (error) {
+ // Imprimimos a mensagem de erro para debug
  console.error('❌ Não foi possível conectar ao banco de dados (VERIFIQUE AS VARIÁVEIS NO RAILWAY):', error.message);
- // No Railway, isso provavelmente causará a falha "Acidentado"
+ // Rejeita a promise para que o erro seja capturado no startServer
+ throw error; 
  }
 };
 
